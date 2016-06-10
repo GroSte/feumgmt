@@ -26,13 +26,15 @@ class MissionUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         ctx = super(MissionUpdate, self).get_context_data(**kwargs)
 
-        geolocator = Nominatim()
-        address = '{0} {1}'.format(self.object.street, self.object.location)
-        location = geolocator.geocode(address)
+        geolocator = Nominatim(format_string="%s, Landkreis Sächsische Schweiz-Osterzgebirge, Sachsen, 01833, Deutschland")
+        address = '{0}, {1}'.format(self.object.street, self.object.location)
 
-        if location:
+        # 11, Alte Hauptstraße, Wilschdorf, Dürrröhrsdorf-Dittersbach, Landkreis Sächsische Schweiz-Osterzgebirge, Sachsen, 01833, Deutschland
+        locations = geolocator.geocode(address, False)
+        if locations:
+            location = locations[0]
             ctx['address'] = location.address
-            ctx['lat'] = location.latitude
-            ctx['long'] = location.longitude
+            ctx['lat'] = float(location.latitude)
+            ctx['long'] = float(location.longitude)
             ctx['raw'] = location.raw
         return ctx
