@@ -1,0 +1,4 @@
+*.pyc
+*.css.map
+.idea
+db.sqlite3
