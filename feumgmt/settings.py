@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'base',
     'leaflet',
     'djgeojson',
+    'crispy_forms',
 )
 
 MIDDLEWARE_CLASSES = (
