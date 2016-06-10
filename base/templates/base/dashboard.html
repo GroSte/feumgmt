@@ -4,6 +4,22 @@
 {% block title %}{{ block.super }} | {% trans 'Dashboard' %}{% endblock %}
 
 {% block content %}
-    Dashboard<br />
+    <h2>Dashboard</h2>
+    <div class="row">
+        <div class="col-md-6 dash-tile-container">
+            <div class="dash-tile">{% trans 'next meeting' %}</div>
+        </div>
+        <div class="col-md-6 dash-tile-container">
+            <div class="dash-tile">{% trans 'last mission' %}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 dash-tile-container">
+            <div class="dash-tile">{% trans 'next ASG date' %}</div>
+        </div>
+        <div class="col-md-6 dash-tile-container">
+            <div class="dash-tile">{% trans 'informations' %}</div>
+        </div>
+    </div>
     <a href="{% url 'mission_list' %}">Missions</a>
 {% endblock %}
