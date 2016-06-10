@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+
+body {
+  background-color: #2E2E2E;
+  color: #ABB5BD;
+  font-family: ubuntu;
+  margin-bottom: 20px; }
+
+h2 {
+  color: #FFFFFF;
+  margin-top: 10px;
+  margin-bottom: 4px; }
+
+/*# sourceMappingURL=base.css.map */

@@ -1,0 +1,58 @@
+{% load staticfiles i18n %}
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>
+            {% block title %}{% trans "FeuMgmt" %}{% endblock %}
+        </title>
+
+        <!-- JavaScript libraries -->
+        <script src="{% static 'base/js/jquery.min.js' %}"></script>
+        <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+
+        <!-- CSS libraries -->
+        <link href="{% static 'base/css/bootstrap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'base/css/base.css' %}" rel="stylesheet" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{% static 'base/img/favicon.png' %}" />
+        {% block css-scripts %}{% endblock %}
+    </head>
+
+    <body>
+        <!-- Top-Bar with menu -->
+        <div class="col-lg-12 top-bar">
+            <div class="row">
+                <div class="col-md-2 col-sm-3 logo">
+                    <a href="{% url 'dashboard' %}">
+                        <img src="{% static 'base/img/bw-logo.png' %}" id="logo" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main-Content -->
+        <div class="col-md-12">
+
+
+            <!-- Content-Block -->
+            <div class="row">
+                <div class="col-md-2 col-sm-3" style="padding-left: 1px;">
+                    {% block left-bar %}{% endblock %}
+                </div>
+                <div class="col-md-10 col-sm-9">
+                    <div class="content">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript basics -->
+        {% block js-scripts %}{% endblock %}
+    </body>
+</html>

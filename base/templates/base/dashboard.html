@@ -1,0 +1,9 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {% trans 'Dashboard' %}{% endblock %}
+
+{% block content %}
+    Dashboard<br />
+    <a href="{% url 'mission_list' %}">Missions</a>
+{% endblock %}
