@@ -7,4 +7,5 @@ jsonfield==1.0.3
 django-geojson==2.9.0
 geopy==1.11.0
 django-crispy-forms==1.6.0
+gunicorn==19.6.0
 django-debug-toolbar
