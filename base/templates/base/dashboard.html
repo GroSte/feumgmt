@@ -6,7 +6,7 @@
 {% block content %}
     <h2>Dashboard</h2>
     <div class="row">
-        <div class="col-md-6 dash-tile-container">
+        <div class="col-md-6 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>nächster Dienst:</h4>
                 Freitag, 01.01.2018 - 19:30 Uhr<br />
@@ -14,7 +14,7 @@
                 <i>M. Oehme, L. Albrecht</i>
             </div>
         </div>
-        <div class="col-md-6 dash-tile-container">
+        <div class="col-md-6 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>letzter Einsatz:</h4>
                 31.12.2017 - 18:13 Uhr<br />
@@ -24,14 +24,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 dash-tile-container">
+        <div class="col-md-6 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>nächster Termin Atemschutzstrecke:</h4>
                 01.01.2019 - 19:00 Uhr in Bischofswerda<br />
                 Teilnehmer: M. Lemke, A. Klimczyk
             </div>
         </div>
-        <div class="col-md-6 dash-tile-container">
+        <div class="col-md-6 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>aktuelle Hinweise:</h4>
                 Am 02.02.2019 findet der Handdruckspritzenwettbewerb in FTL statt.
@@ -39,10 +39,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 dash-tile-container">
+        <div class="col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>Wettervorhersage:</h4>
-                ganz gut
+                ganz gut<br />
+                <a href="{% url 'gallery' %}">Galerie</a>
             </div>
         </div>
     </div>
