@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>
-            {% block title %}{% trans "FeuMgmt" %}{% endblock %}
+            {% block title %}{% trans "F-I-T" %}{% endblock %}
         </title>
 
         <!-- JavaScript libraries -->
@@ -27,11 +27,14 @@
         <!-- Top-Bar with menu -->
         <div class="col-lg-12 top-bar">
             <div class="row">
-                <div class="col-md-2 col-sm-3 logo">
+                <div class="col-md-6 logo">
                     <a href="{% url 'dashboard' %}">
                         <h2><img src="{% static 'base/img/flame.png' %}" style="height: 60px;"/>
-                        FeuMgmt 0.1</h2>
+                        Fire-Info-Terminal 0.1</h2>
                     </a>
+                </div>
+                <div class="col-md-6 text-right">
+                    <h3>{% now "D, d.m.Y - H:i" %}</h3>
                 </div>
             </div>
         </div>
