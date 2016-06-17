@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^dashboard/$', views.Dashboard.as_view(), name='dashboard'),
     url(r'^missions/?$', views.MissionList.as_view(), name='mission_list'),
     url(r'^mission/(?P<pk>\d+)?/?$', views.MissionUpdate.as_view(), name='mission_edit'),
+    url(r'^gallery/?$', views.GalleryList.as_view(), name='gallery'),
 ]

@@ -1,12 +1,18 @@
 # coding=UTF-8
+import os
+
+import time
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
 from geopy import Nominatim
+from os import listdir
+from os.path import isfile, join
 
 from base.forms import MissionForm
 from base.models import Mission
+from feumgmt import settings
 
 
 class Dashboard(TemplateView):
@@ -37,4 +43,26 @@ class MissionUpdate(UpdateView):
             ctx['lat'] = float(location.latitude)
             ctx['long'] = float(location.longitude)
             ctx['raw'] = location.raw
+        return ctx
+
+
+class GalleryList(TemplateView):
+    template_name = 'base/gallery_list.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(GalleryList, self).get_context_data(**kwargs)
+        path = settings.MEDIA_ROOT + 'images/'
+        files = []
+
+        mtime = lambda f: os.stat(os.path.join(path, f)).st_ctime
+        fls = list(sorted(os.listdir(path), key=mtime))
+        for f in reversed(fls):
+            file_path = join(path, f)
+            if not isfile(file_path):
+                continue
+            files.append({
+                'path': f,
+                'time': time.ctime(os.path.getctime(file_path))
+            })
+        ctx['files'] = files
         return ctx

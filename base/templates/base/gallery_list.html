@@ -1,0 +1,23 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {% trans 'Gallery' %}{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Gallery' %}</h2>
+<ul>
+    {% for file in test %}
+        <li>{{ file }}</li>
+    {% endfor %}
+</ul>
+
+    <div class="row">
+        {% for file in files %}
+            <div class="col-md-4 col-sm-6">
+                <img src="/media/images/{{ file.path }}" style="width: 350px; padding: 8px;" />
+                {{ file.path }}
+                {{ file.time }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
