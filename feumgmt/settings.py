@@ -97,3 +97,7 @@ TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
 LOGIN_URL = reverse_lazy('login')
 
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+
+MEDIA_ROOT = '/usr/local/media/'
+
+MEDIA_URL = '/media/'
