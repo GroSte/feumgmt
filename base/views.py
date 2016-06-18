@@ -56,7 +56,9 @@ class GalleryList(TemplateView):
 
         mtime = lambda f: os.stat(os.path.join(path, f)).st_ctime
         fls = list(sorted(os.listdir(path), key=mtime))
+        index = 0
         for f in reversed(fls):
+            index += 1
             file_path = join(path, f)
             if not isfile(file_path):
                 continue
@@ -64,5 +66,7 @@ class GalleryList(TemplateView):
                 'path': f,
                 'time': time.ctime(os.path.getctime(file_path))
             })
+            if index >= 15:
+                break
         ctx['files'] = files
         return ctx
