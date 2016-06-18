@@ -6,7 +6,13 @@
 {% block content %}
     <h2>Dashboard</h2>
     <div class="row">
-        <div class="col-md-6 col-sm-12 dash-tile-container">
+        <div class="col-md-4 col-sm-12 dash-tile-container">
+            <div class="dash-tile">
+                <h4>Wetterwarnungen:</h4>
+                <img src="http://www.unwetterzentrale.de/images/map/sachsen_index.png" alt="" style="height: 425px" />
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>nächster Dienst:</h4>
                 Freitag, 01.01.2018 - 19:30 Uhr<br />
@@ -14,7 +20,7 @@
                 <i>M. Oehme, L. Albrecht</i>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 dash-tile-container">
+        <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>letzter Einsatz:</h4>
                 31.12.2017 - 18:13 Uhr<br />
@@ -22,28 +28,26 @@
                 <a href="{% url 'mission_list' %}">Einsätze</a>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-sm-12 dash-tile-container">
+        <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>nächster Termin Atemschutzstrecke:</h4>
                 01.01.2019 - 19:00 Uhr in Bischofswerda<br />
                 Teilnehmer: M. Lemke, A. Klimczyk
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 dash-tile-container">
+        <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>aktuelle Hinweise:</h4>
-                Am 02.02.2019 findet der Handdruckspritzenwettbewerb in FTL statt.
+                Am 02.02.2019 findet der Handdruckspritzenwettbewerb in FTL statt.<br />
+                <a href="{% url 'gallery' %}">Galerie</a>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 dash-tile-container">
+        <div class="col-md-8 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>Wettervorhersage:</h4>
-                ganz gut<br />
-                <a href="{% url 'gallery' %}">Galerie</a>
+
+                <div id="weatherWidget" data-serviceid="57656f3db66525.52521936" data-format="600x150" data-version="1.1" data-city="18232776" data-source="http://www.wetter24.de"><div serviceid="weatherWidgetBlock"></div><script src="http://www.wetter24.de/fileadmin/scripts/widget.js"></script></div>
+
             </div>
         </div>
     </div>
