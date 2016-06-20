@@ -34,7 +34,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 text-right">
-                    <h3>{% now "D, d.m.Y - H:i" %}</h3>
+                    <h3><span id="span-date">{% now "d.m.Y - H:i:s" %}</span></h3>
                 </div>
             </div>
         </div>
@@ -66,5 +66,17 @@
 
         <!-- JavaScript basics -->
         {% block js-scripts %}{% endblock %}
+
+        <script type="text/javascript">
+        $(function() {
+            // display clock
+            setInterval(function() {
+                var today = new Date();
+                var text = today.toLocaleDateString() + " - " + today.toLocaleTimeString();
+                $('#span-date').text(text);
+            }, 1000);
+        });
+
+    </script>
     </body>
 </html>
