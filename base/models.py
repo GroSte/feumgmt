@@ -40,6 +40,36 @@ class Vehicle(models.Model):
         return self.call_sign
 
 
+class Training(models.Model):
+    date = models.DateTimeField(max_length=100, verbose_name=_('Date'))
+    subject = models.CharField(max_length=200, verbose_name=_('Subject'))
+    hint = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Hint'))
+    firefighters = models.ManyToManyField(UserProfile, verbose_name='Firefighters')
+
+    class Meta:
+        verbose_name = _('Training')
+        verbose_name_plural = _('Trainings')
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.date, self.subject)
+
+
+class BreathingProtectionTraining(models.Model):
+    date = models.DateTimeField(max_length=100, verbose_name=_('Date'))
+    location = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Location'))
+    organizer = models.ForeignKey(UserProfile, verbose_name=_('Organizer'),
+                                  related_name='bpt_organizer')
+    firefighters = models.ManyToManyField(UserProfile, related_name='bpt_firefighters',
+                                          verbose_name=_('Firefighters'))
+
+    class Meta:
+        verbose_name = _('Breathing Protection Training')
+        verbose_name_plural = _('Breathing Protection Trainings')
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.date, self.location)
+
+
 class Mission(models.Model):
     number = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Number'))  # Einsatz-Nummer
     alarm_time = models.DateTimeField(verbose_name=_('Alarm Time'))  # Alarmierungszeit
