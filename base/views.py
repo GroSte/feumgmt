@@ -11,12 +11,33 @@ from os import listdir
 from os.path import isfile, join
 
 from base.forms import MissionForm
-from base.models import Mission
+from base.models import Mission, Training, BreathingProtectionTraining
 from feumgmt import settings
 
 
 class Dashboard(TemplateView):
     template_name = 'base/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(Dashboard, self).get_context_data(**kwargs)
+
+        next_training = Training.objects.all().order_by('-date').first()
+        ff = ','.join([str(f) for f in next_training.firefighters.all()])
+        ctx['next_training'] = {
+            'date': next_training.date,
+            'subject': next_training.subject,
+            'firefighters': ff,
+        }
+
+        next_bpt = BreathingProtectionTraining.objects.all().order_by('-date').first()
+        ff = ','.join([str(f) for f in next_bpt.firefighters.all()])
+        ctx['next_bpt'] = {
+            'date': next_bpt.date,
+            'location': next_bpt.location,
+            'firefighters': ff,
+        }
+
+        return ctx
 
 
 class MissionList(ListView):
