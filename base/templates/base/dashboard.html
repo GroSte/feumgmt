@@ -15,7 +15,10 @@
     <div class="row">
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>{% trans 'Weather Warnings' %}:</h4>
+                <h4>
+                    <img src="{% static 'base/img/flash.png' %}" class="icon" />
+                    {% trans 'Weather Warnings' %}:
+                </h4>
                 <img id="img-storm"
                      src="http://www.unwetterzentrale.de/images/map/sachsen_index.png"
                      alt="{% trans 'Storm Map' %}" />
@@ -23,15 +26,21 @@
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>{% trans 'Next Training' %}:</h4>
-                Freitag, 01.01.2018 - 19:30 Uhr<br />
-                TH Theorie<br />
-                <i>M. Oehme, L. Albrecht</i>
+                <h4>
+                    <img src="{% static 'base/img/presentation.png' %}" class="icon" />
+                    {% trans 'Next Training' %}:
+                </h4>
+                {{ next_training.date|date:"D, d.m.Y - H:i" }}<br />
+                {% trans 'Subject' %}: {{ next_training.subject }}<br />
+                <i>{% trans 'Responsibles' %}: {{ next_training.firefighters }}</i>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>{% trans 'Last Mission' %}:</h4>
+                <h4>
+                    <img src="{% static 'base/img/alarm-siren.png' %}" class="icon" />
+                    {% trans 'Last Mission' %}:
+                </h4>
                 31.12.2017 - 18:13 Uhr<br />
                 Hochwasser in Dürrröhrsdorf<br />
                 <a href="{% url 'mission_list' %}">{% trans 'Missions' %}</a>
@@ -39,22 +48,30 @@
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>{% trans 'Next ASG Date' %}:</h4>
-                01.01.2019 - 19:00 Uhr in Bischofswerda<br />
-                Teilnehmer: M. Lemke, A. Klimczyk
+                <h4>
+                    <img src="{% static 'base/img/fire-extinguisher.png' %}" class="icon" />
+                    {% trans 'Next Breathing Protection Training' %}:
+                </h4>
+                {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
+                <i>{% trans 'Participants' %}: {{ next_bpt.firefighters }}</i>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>{% trans 'Current Hints' %}:</h4>
+                <h4>
+                    <img src="{% static 'base/img/notepad.png' %}" class="icon" />
+                    {% trans 'Current Hints' %}:
+                </h4>
                 Am 02.02.2019 findet der Handdruckspritzenwettbewerb in FTL statt.<br />
                 <a href="{% url 'gallery' %}">{% trans 'Gallery' %}</a>
             </div>
         </div>
         <div class="col-md-8 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>{% trans 'Weather Forecast' %}:</h4>
-
+                <h4>
+                    <img src="{% static 'base/img/cloud-and-sun.png' %}" class="icon" />
+                    {% trans 'Weather Forecast' %}:
+                </h4>
                 <div id="weatherWidget" data-serviceid="57656f3db66525.52521936" data-format="600x150" data-version="1.1" data-city="18232776" data-source="http://www.wetter24.de">
                     <div serviceid="weatherWidgetBlock"></div>
                     <script src="http://www.wetter24.de/fileadmin/scripts/widget.js"></script>
