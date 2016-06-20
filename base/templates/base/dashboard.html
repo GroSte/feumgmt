@@ -3,18 +3,27 @@
 
 {% block title %}{{ block.super }} | {% trans 'Dashboard' %}{% endblock %}
 
+{% block css-scripts %}
+    <style type="text/css">
+        #img-storm {
+            height: 425px
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <h2>Dashboard</h2>
     <div class="row">
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>Wetterwarnungen:</h4>
-                <img src="http://www.unwetterzentrale.de/images/map/sachsen_index.png" alt="" style="height: 425px" />
+                <h4>{% trans 'Weather Warnings' %}:</h4>
+                <img id="img-storm"
+                     src="http://www.unwetterzentrale.de/images/map/sachsen_index.png"
+                     alt="{% trans 'Storm Map' %}" />
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>nächster Dienst:</h4>
+                <h4>{% trans 'Next Training' %}:</h4>
                 Freitag, 01.01.2018 - 19:30 Uhr<br />
                 TH Theorie<br />
                 <i>M. Oehme, L. Albrecht</i>
@@ -22,33 +31,53 @@
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>letzter Einsatz:</h4>
+                <h4>{% trans 'Last Mission' %}:</h4>
                 31.12.2017 - 18:13 Uhr<br />
                 Hochwasser in Dürrröhrsdorf<br />
-                <a href="{% url 'mission_list' %}">Einsätze</a>
+                <a href="{% url 'mission_list' %}">{% trans 'Missions' %}</a>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>nächster Termin Atemschutzstrecke:</h4>
+                <h4>{% trans 'Next ASG Date' %}:</h4>
                 01.01.2019 - 19:00 Uhr in Bischofswerda<br />
                 Teilnehmer: M. Lemke, A. Klimczyk
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>aktuelle Hinweise:</h4>
+                <h4>{% trans 'Current Hints' %}:</h4>
                 Am 02.02.2019 findet der Handdruckspritzenwettbewerb in FTL statt.<br />
-                <a href="{% url 'gallery' %}">Galerie</a>
+                <a href="{% url 'gallery' %}">{% trans 'Gallery' %}</a>
             </div>
         </div>
         <div class="col-md-8 col-sm-12 dash-tile-container">
             <div class="dash-tile">
-                <h4>Wettervorhersage:</h4>
+                <h4>{% trans 'Weather Forecast' %}:</h4>
 
-                <div id="weatherWidget" data-serviceid="57656f3db66525.52521936" data-format="600x150" data-version="1.1" data-city="18232776" data-source="http://www.wetter24.de"><div serviceid="weatherWidgetBlock"></div><script src="http://www.wetter24.de/fileadmin/scripts/widget.js"></script></div>
+                <div id="weatherWidget" data-serviceid="57656f3db66525.52521936" data-format="600x150" data-version="1.1" data-city="18232776" data-source="http://www.wetter24.de">
+                    <div serviceid="weatherWidgetBlock"></div>
+                    <script src="http://www.wetter24.de/fileadmin/scripts/widget.js"></script>
+                </div>
 
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js-scripts %}
+    <script type="text/javascript">
+        $(function() {
+            // reload storm image after 30sec
+            setInterval(function() {
+                $("#img-storm").attr("src", "http://www.unwetterzentrale.de/images/map/sachsen_index.png?" + new Date().getTime());
+            }, 30000);
+
+            // reload dashboard every 10 min
+            setInterval(function() {
+                location.reload();
+            }, 600000);
+        });
+
+    </script>
 {% endblock %}
