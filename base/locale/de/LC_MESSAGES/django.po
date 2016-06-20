@@ -7,74 +7,165 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-10 12:14+0200\n"
-"PO-Revision-Date: 2016-06-10 12:16+0100\n"
+"POT-Creation-Date: 2016-06-20 09:27+0200\n"
+"PO-Revision-Date: 2016-06-20 09:29+0100\n"
+"Last-Translator: Steve Gröber <steve.groeber@shd-online.de>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Steve Gröber <steve.groeber@shd-online.de>\n"
-"Language-Team: \n"
 "Language: de\n"
 "X-Generator: Poedit 1.8.1\n"
 
-#: .\base\models.py:7 .\base\templates\base\mission_list.html.py:11
+#: .\base\models.py:10
+msgid "Grade"
+msgstr "Dienstgrad"
+
+#: .\base\models.py:12
+msgid "Phone Number"
+msgstr "Telefonnummer"
+
+#: .\base\models.py:14
+msgid "Mobile Phone Number"
+msgstr "Handynummer"
+
+#: .\base\models.py:16
+msgid "Birth Date"
+msgstr "Gebutsdatum"
+
+#: .\base\models.py:17
+msgid "Online"
+msgstr "Online"
+
+#: .\base\models.py:18
+msgid "Online date"
+msgstr "Online-Datum"
+
+#: .\base\models.py:19
+msgid "Online IP"
+msgstr "Online-IP"
+
+#: .\base\models.py:23
+msgid "User"
+msgstr "Benutzer"
+
+#: .\base\models.py:24
+msgid "Users"
+msgstr "Benutzer"
+
+#: .\base\models.py:31
+msgid "Call Sign"
+msgstr "Funkrufname"
+
+#: .\base\models.py:32
+msgid "Crew"
+msgstr "Besatzung"
+
+#: .\base\models.py:33
+msgid "Badge"
+msgstr "Kennzeichen"
+
+#: .\base\models.py:36
+msgid "Vehicle"
+msgstr "Fahrzeug"
+
+#: .\base\models.py:37
+msgid "Vehicles"
+msgstr "Fahrzeuge"
+
+#: .\base\models.py:44 .\base\templates\base\mission_list.html:11
 msgid "Number"
 msgstr "Nummer"
 
-#: .\base\models.py:8
+#: .\base\models.py:45 .\base\templates\base\mission_list.html:12
 msgid "Alarm Time"
 msgstr "Alarmzeit"
 
-#: .\base\models.py:9 .\base\templates\base\mission_list.html.py:12
+#: .\base\models.py:46 .\base\templates\base\mission_list.html:13
 msgid "Keyword"
 msgstr "Stichwort"
 
-#: .\base\models.py:10
+#: .\base\models.py:47
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\base\models.py:11
+#: .\base\models.py:48
 msgid "Volume"
 msgstr "Umfang"
 
-#: .\base\models.py:12
+#: .\base\models.py:49
 msgid "Concerned"
 msgstr "Betroffene"
 
-#: .\base\models.py:13
+#: .\base\models.py:50
 msgid "Name"
 msgstr "Name"
 
-#: .\base\models.py:14 .\base\templates\base\mission_list.html.py:14
+#: .\base\models.py:51 .\base\templates\base\mission_list.html:15
 msgid "Street"
 msgstr "Straße"
 
-#: .\base\models.py:15 .\base\templates\base\mission_list.html.py:13
+#: .\base\models.py:52 .\base\templates\base\mission_list.html:14
 msgid "Location"
 msgstr "Ort"
 
-#: .\base\models.py:16
+#: .\base\models.py:53
 msgid "Coordinates"
 msgstr "Koordinaten"
 
-#: .\base\models.py:17
+#: .\base\models.py:54
 msgid "Signal"
 msgstr "Sondersignal"
 
-#: .\base\models.py:20 .\base\templates\base\mission_form.html.py:4
+#: .\base\models.py:59 .\base\templates\base\mission_form.html:4
 #: .\base\templates\base\mission_list.html:4
 msgid "Mission"
 msgstr "Einsatz"
 
-#: .\base\models.py:21 .\base\templates\base\mission_list.html.py:7
+#: .\base\models.py:60 .\base\templates\base\dashboard.html:37
+#: .\base\templates\base\mission_list.html:7
 msgid "Missions"
 msgstr "Einsätze"
 
 #: .\base\templates\base\__base.html:10
-msgid "FeuMgmt"
-msgstr ""
+msgid "F-I-T"
+msgstr "F-I-T"
 
 #: .\base\templates\base\dashboard.html:4
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
+
+#: .\base\templates\base\dashboard.html:18
+msgid "Weather Warnings"
+msgstr "Wetterwarnungen"
+
+#: .\base\templates\base\dashboard.html:21
+msgid "Storm Map"
+msgstr "Unwetter-Karte"
+
+#: .\base\templates\base\dashboard.html:26
+msgid "Next Training"
+msgstr "Nächster Dienst"
+
+#: .\base\templates\base\dashboard.html:34
+msgid "Last Mission"
+msgstr "Letzter Einsatz"
+
+#: .\base\templates\base\dashboard.html:42
+msgid "Next ASG Date"
+msgstr "Nächster Termin Atemschutzstrecke"
+
+#: .\base\templates\base\dashboard.html:49
+msgid "Current Hints"
+msgstr "Aktuelle Hinweise"
+
+#: .\base\templates\base\dashboard.html:51
+#: .\base\templates\base\gallery_list.html:4
+#: .\base\templates\base\gallery_list.html:7
+msgid "Gallery"
+msgstr "Galerie"
+
+#: .\base\templates\base\dashboard.html:56
+msgid "Weather Forecast"
+msgstr "Wettervorhersage"
