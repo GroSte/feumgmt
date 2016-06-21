@@ -1,2 +1,18 @@
 - Deployment aufm Pi
 - Anbindung Leaflet
+- Integration OpenFireMap
+- Anzeige Pegelstaende
+
+Einsatz-Dashboard:
+- Alarmierung per Mail (IRLS)
+- Auswertung der Alarmierung
+- Weiter-Alarmierung per SMS oder WhatsApp
+- Anzeige alarmierter Fahrzeuge
+- Anzeige Hydranten und POI
+- Anzeige der Route zum Einsatzort (plus Entfernung und Zeit)
+
+- evtl. Monitor in Umkleide
+
+Referenzen:
+https://github.com/seiferta/eMonitor
+https://github.com/windele/alarmdisplay-ffw
