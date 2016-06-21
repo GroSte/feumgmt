@@ -1,4 +1,4 @@
-# encoding: utf8
+# -*- coding: utf-8 -*-
 from django.db import migrations
 from base.utils import LoadDataWithModelState
 

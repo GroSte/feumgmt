@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     phone_number = models.CharField(max_length=25, blank=True, null=True,
                                     verbose_name=_('Phone Number'))
     mobile_phone_number = models.CharField(max_length=25, blank=True, null=True,
-                                    verbose_name=_('Mobile Phone Number'))
+                                           verbose_name=_('Mobile Phone Number'))
     birth_date = models.DateField(max_length=45, blank=True, null=True,
                                   verbose_name=_('Birth Date'))
     admittance = models.DateField(max_length=45, blank=True, null=True,
