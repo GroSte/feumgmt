@@ -8,5 +8,8 @@ urlpatterns = [
     url(r'^dashboard/$', views.Dashboard.as_view(), name='dashboard'),
     url(r'^missions/?$', views.MissionList.as_view(), name='mission_list'),
     url(r'^mission/(?P<pk>\d+)?/?$', views.MissionUpdate.as_view(), name='mission_edit'),
+    url(r'^bp-trainings/?$', views.BPTrainingList.as_view(), name='bptraining_list'),
+    url(r'^bp-training/new$', views.BPTrainingCreate.as_view(), name='bptraining_new'),
+    url(r'^bp-training/(?P<pk>\d+)?/?$', views.BPTrainingUpdate.as_view(), name='bptraining_edit'),
     url(r'^gallery/?$', views.GalleryList.as_view(), name='gallery'),
 ]

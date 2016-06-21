@@ -53,7 +53,8 @@
                     {% trans 'Next Breathing Protection Training' %}:
                 </h4>
                 {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
-                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i>
+                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i><br />
+                <a href="{% url 'bptraining_list' %}">{% trans 'Breathing Protection Trainings' %}</a>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
