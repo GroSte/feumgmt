@@ -43,7 +43,19 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-sm-12" style="padding-left: 1px;">
-                    {% block left-bar %}{% endblock %}
+                    {% block left-bar %}
+                        <ul class="nav nav-pills">
+                            <li role="presentation">
+                                <a href="{% url 'dashboard' %}">{% trans 'Home' %}</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="{% url 'mission_list' %}">{% trans 'Missions' %}</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="{% url 'bptraining_list' %}">{% trans 'Breathing Protection Trainings' %}</a>
+                            </li>
+                        </ul>
+                    {% endblock %}
                 </div>
             </div>
             <div class="row">
