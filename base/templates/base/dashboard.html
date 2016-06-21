@@ -16,34 +16,12 @@
         <div class="col-md-4 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>
-                    <img src="{% static 'base/img/flash.png' %}" class="icon" />
-                    {% trans 'Weather Warnings' %}:
-                </h4>
-                <img id="img-storm"
-                     src="http://www.unwetterzentrale.de/images/map/sachsen_index.png"
-                     alt="{% trans 'Storm Map' %}" />
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
                     <img src="{% static 'base/img/presentation.png' %}" class="icon" />
                     {% trans 'Next Training' %}:
                 </h4>
                 {{ next_training.date|date:"D, d.m.Y - H:i" }}<br />
                 {% trans 'Subject' %}: {{ next_training.subject }}<br />
                 <i>{% trans 'Responsibles' %}: {{ next_training.responsibles }}</i>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
-                    <img src="{% static 'base/img/alarm-siren.png' %}" class="icon" />
-                    {% trans 'Last Mission' %}:
-                </h4>
-                31.12.2017 - 18:13 Uhr<br />
-                Hochwasser in Dürrröhrsdorf<br />
-                <a href="{% url 'mission_list' %}">{% trans 'Missions' %}</a>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
@@ -67,7 +45,36 @@
                 <a href="{% url 'gallery' %}">{% trans 'Gallery' %}</a>
             </div>
         </div>
-        <div class="col-md-8 col-sm-12 dash-tile-container">
+        <div class="col-md-4 col-sm-12 dash-tile-container">
+            <div class="dash-tile">
+                <h4>
+                    <img src="{% static 'base/img/flash.png' %}" class="icon" />
+                    {% trans 'Weather Warnings' %}:
+                </h4>
+                <img id="img-storm"
+                     src="http://www.unwetterzentrale.de/images/map/sachsen_index.png"
+                     alt="{% trans 'Storm Map' %}" />
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 dash-tile-container">
+            <div class="dash-tile">
+                <h4>
+                    <img src="{% static 'base/img/presentation.png' %}" class="icon" />
+                    {% trans 'Pegel Wesenitz Elbersdorf' %}:
+                </h4>
+                <img src="http://www.umwelt.sachsen.de/umwelt/infosysteme/hwims/portal/diagramme/diagrammimage_550810_WEB_W" alt="" />
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 dash-tile-container">
+            <div class="dash-tile">
+                <h4>
+                    <img src="{% static 'base/img/presentation.png' %}" class="icon" />
+                    {% trans 'Pegel Elbe Schoena' %}:
+                </h4>
+                <img src="http://www.umwelt.sachsen.de/umwelt/infosysteme/hwims/portal/diagramme/diagrammimage_501010_WEB_W" alt="" />
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>
                     <img src="{% static 'base/img/cloud-and-sun.png' %}" class="icon" />
