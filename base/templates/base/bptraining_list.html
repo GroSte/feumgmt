@@ -1,0 +1,30 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {% trans 'Breathing Protection Training' %}{% endblock %}
+
+{% block content %}
+    <h2>{% trans 'Breathing Protection Trainings' %}</h2>
+    <a href="{% url 'bptraining_new' %}">
+        <button type="button" class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-file"></span>
+            {% trans 'Create breathing protection training' %}
+        </button>
+    </a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>{% trans 'Date' %}</th>
+                <th>{% trans 'Location' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+                <tr>
+                    <td><a href="{% url 'bptraining_edit' item.id %}">{{ item.date|date:"d.m.Y" }}</a></td>
+                    <td>{{ item.location }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

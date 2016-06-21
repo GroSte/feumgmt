@@ -5,12 +5,12 @@ import time
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from geopy import Nominatim
 from os import listdir
 from os.path import isfile, join
 
-from base.forms import MissionForm
+from base.forms import MissionForm, BPTrainingForm
 from base.models import Mission, Training, BreathingProtectionTraining
 from feumgmt import settings
 
@@ -66,6 +66,30 @@ class MissionUpdate(UpdateView):
             ctx['lat'] = float(location.latitude)
             ctx['long'] = float(location.longitude)
             ctx['raw'] = location.raw
+        return ctx
+
+
+class BPTrainingList(ListView):
+    model = BreathingProtectionTraining
+    template_name = 'base/bptraining_list.html'
+
+
+class BPTrainingCreate(CreateView):
+    model = BreathingProtectionTraining
+    success_url = reverse_lazy('bptraining_list')
+    form_class = BPTrainingForm
+    template_name = 'base/bptraining_form.html'
+
+
+class BPTrainingUpdate(UpdateView):
+    model = BreathingProtectionTraining
+    success_url = reverse_lazy('bptraining_list')
+    form_class = BPTrainingForm
+    template_name = 'base/bptraining_form.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BPTrainingUpdate, self).get_context_data(**kwargs)
+        # todo
         return ctx
 
 

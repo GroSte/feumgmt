@@ -1,0 +1,9 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n leaflet_tags geojson_tags crispy_forms_tags %}
+
+{% block title %}{{ block.super }} | {% trans 'Breathing Protection Training' %}{% endblock %}
+
+{% block content %}
+    {{ form.media }}
+    {% crispy form %}
+{% endblock %}
