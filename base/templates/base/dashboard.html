@@ -32,7 +32,7 @@
                 </h4>
                 {{ next_training.date|date:"D, d.m.Y - H:i" }}<br />
                 {% trans 'Subject' %}: {{ next_training.subject }}<br />
-                <i>{% trans 'Responsibles' %}: {{ next_training.firefighters }}</i>
+                <i>{% trans 'Responsibles' %}: {{ next_training.responsibles }}</i>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
@@ -53,7 +53,7 @@
                     {% trans 'Next Breathing Protection Training' %}:
                 </h4>
                 {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
-                <i>{% trans 'Participants' %}: {{ next_bpt.firefighters }}</i>
+                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">

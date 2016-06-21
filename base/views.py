@@ -22,20 +22,22 @@ class Dashboard(TemplateView):
         ctx = super(Dashboard, self).get_context_data(**kwargs)
 
         next_training = Training.objects.all().order_by('-date').first()
-        ff = ','.join([str(f) for f in next_training.firefighters.all()])
-        ctx['next_training'] = {
-            'date': next_training.date,
-            'subject': next_training.subject,
-            'firefighters': ff,
-        }
+        if next_training:
+            responsibles = ','.join([str(f) for f in next_training.responsibles.all()])
+            ctx['next_training'] = {
+                'date': next_training.date,
+                'subject': next_training.subject,
+                'responsibles': responsibles,
+            }
 
         next_bpt = BreathingProtectionTraining.objects.all().order_by('-date').first()
-        ff = ','.join([str(f) for f in next_bpt.firefighters.all()])
-        ctx['next_bpt'] = {
-            'date': next_bpt.date,
-            'location': next_bpt.location,
-            'firefighters': ff,
-        }
+        if next_bpt:
+            participants = ','.join([str(f) for f in next_bpt.participants.all()])
+            ctx['next_bpt'] = {
+                'date': next_bpt.date,
+                'location': next_bpt.location,
+                'participants': participants,
+            }
 
         return ctx
 
