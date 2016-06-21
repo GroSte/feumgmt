@@ -1,3 +1,4 @@
+# coding=UTF-8
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -14,9 +15,14 @@ class UserProfile(models.Model):
                                     verbose_name=_('Mobile Phone Number'))
     birth_date = models.DateField(max_length=45, blank=True, null=True,
                                   verbose_name=_('Birth Date'))
+    admittance = models.DateField(max_length=45, blank=True, null=True,
+                                  verbose_name=_('Admittance'))
     online = models.BooleanField(default=False, verbose_name=_('Online'))
     online_date = models.DateTimeField(blank=True, null=True, verbose_name=_('Online date'))
     online_ip = models.CharField(max_length=15, blank=True, null=True, verbose_name=_('Online IP'))
+
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
 
     class Meta:
         db_table = 'user'
@@ -28,9 +34,14 @@ class UserProfile(models.Model):
 
 
 class Vehicle(models.Model):
-    call_sign = models.CharField(max_length=100, verbose_name=_('Call Sign'))# Kenner
-    crew = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Crew'))# Besatzung
-    badge = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Badge'))# Kennzeichen
+    call_sign = models.CharField(max_length=100, verbose_name=_('Call Sign'))  # Kenner
+    crew = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Crew'))  # Besatzung
+    number_plate = models.CharField(blank=True, null=True, max_length=20,
+                                    verbose_name=_('Number Plate'))  # Kennzeichen
+
+    editor = models.ForeignKey(UserProfile, null=True, blank=True, verbose_name=_('Editor'))
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
 
     class Meta:
         verbose_name = _('Vehicle')
@@ -43,8 +54,15 @@ class Vehicle(models.Model):
 class Training(models.Model):
     date = models.DateTimeField(max_length=100, verbose_name=_('Date'))
     subject = models.CharField(max_length=200, verbose_name=_('Subject'))
-    hint = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Hint'))
-    firefighters = models.ManyToManyField(UserProfile, verbose_name='Firefighters')
+    note = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Note'))
+    responsibles = models.ManyToManyField(UserProfile, blank=True,
+                                          related_name='training_responsibles',
+                                          verbose_name=_('Responsibles'))
+
+    editor = models.ForeignKey(UserProfile, null=True, blank=True, related_name='training_editor',
+                               verbose_name=_('Editor'))
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
 
     class Meta:
         verbose_name = _('Training')
@@ -59,8 +77,13 @@ class BreathingProtectionTraining(models.Model):
     location = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Location'))
     organizer = models.ForeignKey(UserProfile, verbose_name=_('Organizer'),
                                   related_name='bpt_organizer')
-    firefighters = models.ManyToManyField(UserProfile, related_name='bpt_firefighters',
-                                          verbose_name=_('Firefighters'))
+    participants = models.ManyToManyField(UserProfile, blank=True,
+                                          related_name='bpt_participants',
+                                          verbose_name=_('Participants'))
+
+    editor = models.ForeignKey(UserProfile, null=True, blank=True, verbose_name=_('Editor'))
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
 
     class Meta:
         verbose_name = _('Breathing Protection Training')
@@ -82,8 +105,15 @@ class Mission(models.Model):
     location = models.CharField(max_length=200, verbose_name=_('Location'))  # Ort
     coordinates = PointField(blank=True, null=True, verbose_name=_('Coordinates'))  # Koordinaten
     signal = models.BooleanField(default=True, verbose_name=_('Signal'))  # Sondersignal
-    vehicles = models.ManyToManyField(Vehicle)  # Fahrzeuge
-    firefighters = models.ManyToManyField(UserProfile)  # Einsatzkraefte
+    vehicles = models.ManyToManyField(Vehicle, blank=True, verbose_name=_('Vehicles'))  # Fahrzeuge
+    firefighters = models.ManyToManyField(UserProfile, blank=True,
+                                          related_name='mission_firefighters',
+                                          verbose_name=_('Firefighters'))  # Einsatzkraefte
+
+    editor = models.ForeignKey(UserProfile, null=True, blank=True, related_name='mission_editor',
+                               verbose_name=_('Editor'))
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
 
     class Meta:
         verbose_name = _('Mission')
