@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import os
 
+import os
 import time
+
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView, CreateView
 from geopy import Nominatim
-from os import listdir
 from os.path import isfile, join
 
 from base.forms import MissionForm, BPTrainingForm
+from base.geo_locator import GeoLocator
 from base.models import Mission, Training, BreathingProtectionTraining
 from feumgmt import settings
 
@@ -67,6 +68,26 @@ class MissionUpdate(UpdateView):
             ctx['lat'] = float(location.latitude)
             ctx['long'] = float(location.longitude)
             ctx['raw'] = location.raw
+        return ctx
+
+
+class MissionAlarm(TemplateView):
+    model = Mission
+    template_name = 'base/mission_alarm.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(MissionAlarm, self).get_context_data(**kwargs)
+
+        mission = Mission.objects.all().order_by('-alarm_time').first()
+        ctx['object'] = mission
+
+        geo_locator = GeoLocator()
+
+        key = settings.MAP_QUEST_KEY
+        address = '{0}, {1}'.format(mission.street, mission.location)
+
+        ctx.update(geo_locator.get_location_coordinates(key, address))
+        ctx.update(geo_locator.get_route(key, address))
         return ctx
 
 

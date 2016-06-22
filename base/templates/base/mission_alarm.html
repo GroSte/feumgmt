@@ -1,0 +1,123 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n leaflet_tags geojson_tags crispy_forms_tags %}
+
+{% block title %}{{ block.super }} | {% trans 'Mission' %}{% endblock %}
+
+{% block css-scripts %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+
+    <style>
+        .leaflet-container {  /* all maps */
+            width:  100%;
+            height: 600px;
+        }
+        h2, h3, h4 {
+            margin: 0;
+        }
+        .colored-container {
+            width: 100%;
+            padding: 0.5em 0.4em;
+            border: 1px solid #FFF;
+            margin: 2px 0;
+        }
+        .red {
+            background-color: red;
+            color: #FFF;
+        }
+        .yellow {
+            background-color: orange;
+            color: #000;
+        }
+        .blue {
+            background-color: cornflowerblue;
+            color: #000;
+        }
+        .gray {
+            background-color: #555;
+            color: #FFF;
+        }
+        .white {
+            background-color: #EEE;
+            color: #000;
+        }
+        .vehicle-listing {
+            padding: 0.7em 1.4em;
+        }
+        .vehicle-listing > li {
+            font-size: 1.4em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <div class="colored-container red">
+                <h2>{% trans 'Mission Alarm' %}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <div class="colored-container yellow">
+                <h3>{{ object.keyword }}-{{ object.volume }}-{{ object.concerned }} / {{ object.description }}</h3>
+                <h3>{{ object.name }}, {{ object.street }}, {{ object.location }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            {% leaflet_map "mapid" %}
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% if object.signal %}
+                        <div class="colored-container blue">
+                            <h3>{% trans 'Signal' %}: {% trans 'yes' %}</h3>
+                        </div>
+                    {% else %}
+                        <div class="colored-container white">
+                            <h3>{% trans 'Signal' %}: {% trans 'no' %}</h3>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="colored-container gray">
+                        <h3>{% trans 'Vehicles' %}:</h3>
+                        <ul class="vehicle-listing">
+                            {% for v in object.vehicles.all %}
+                                <li>{{ v }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="colored-container gray">
+                        <h3>{% trans 'Notes' %}:</h3>
+                        <ul class="vehicle-listing">
+                            <li>{% trans 'Distance' %}: {{ distance|default:'-' }}</li>
+                            <li>{% trans 'Time' %}: {{ time|default:'-' }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js-scripts %}
+    <script src="{% static 'base/js/map.js' %}"></script>
+    <script type="text/javascript">
+        var msg = '<b>{{ object }}</b><br>{{ object.street }}<br />{{ object.location }}';
+        initMap('mapid', '{{ lat|stringformat:"f" }}', '{{ long|stringformat:"f" }}', msg);
+    </script>
+{% endblock %}
