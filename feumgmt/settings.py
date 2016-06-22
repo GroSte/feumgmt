@@ -101,3 +101,6 @@ LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 MEDIA_ROOT = '/usr/local/media/'
 
 MEDIA_URL = '/media/'
+
+# Map Quest
+MAP_QUEST_KEY = 'oQRzhm9MDvaCgleEFAI9jPVZ1bF1wFd7'
