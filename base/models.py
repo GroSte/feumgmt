@@ -1,4 +1,5 @@
-# coding=UTF-8
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -29,7 +30,7 @@ class UserProfile(models.Model):
         verbose_name = _('User')
         verbose_name_plural = _('Users')
 
-    def __str__(self):
+    def __unicode__(self):
         return '{0} {1}'.format(self.user.first_name, self.user.last_name)
 
 
@@ -47,7 +48,7 @@ class Vehicle(models.Model):
         verbose_name = _('Vehicle')
         verbose_name_plural = _('Vehicles')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.call_sign
 
 
@@ -68,7 +69,7 @@ class Training(models.Model):
         verbose_name = _('Training')
         verbose_name_plural = _('Trainings')
 
-    def __str__(self):
+    def __unicode__(self):
         return '{0} - {1}'.format(self.date, self.subject)
 
 
@@ -89,7 +90,7 @@ class BreathingProtectionTraining(models.Model):
         verbose_name = _('Breathing Protection Training')
         verbose_name_plural = _('Breathing Protection Trainings')
 
-    def __str__(self):
+    def __unicode__(self):
         return '{0} - {1}'.format(self.date, self.location)
 
 
@@ -119,5 +120,5 @@ class Mission(models.Model):
         verbose_name = _('Mission')
         verbose_name_plural = _('Missions')
 
-    def __str__(self):
+    def __unicode__(self):
         return '{0} / {1} - {2}'.format(self.number, self.keyword, self.location)
