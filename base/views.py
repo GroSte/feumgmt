@@ -4,7 +4,9 @@ from __future__ import unicode_literals
 import os
 import time
 
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.urlresolvers import reverse_lazy
+from django.utils import timezone
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView, CreateView
@@ -96,23 +98,30 @@ class BPTrainingList(ListView):
     template_name = 'base/bptraining_list.html'
 
 
-class BPTrainingCreate(CreateView):
+class BPTrainingCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = BreathingProtectionTraining
     success_url = reverse_lazy('bptraining_list')
     form_class = BPTrainingForm
     template_name = 'base/bptraining_form.html'
+    permission_required = 'add_breathingprotectiontraining'
+
+    def form_valid(self, form):
+        form.instance.organizer_id = self.request.user.id
+        form.instance.editor_id = self.request.user.id
+        form.instance.creation_date = timezone.now()
+        return super(BPTrainingCreate, self).form_valid(form)
 
 
-class BPTrainingUpdate(UpdateView):
+class BPTrainingUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = BreathingProtectionTraining
     success_url = reverse_lazy('bptraining_list')
     form_class = BPTrainingForm
     template_name = 'base/bptraining_form.html'
+    permission_required = 'change_breathingprotectiontraining'
 
-    def get_context_data(self, **kwargs):
-        ctx = super(BPTrainingUpdate, self).get_context_data(**kwargs)
-        # todo
-        return ctx
+    def form_valid(self, form):
+        form.instance.editor_id = self.request.user.id
+        return super(BPTrainingUpdate, self).form_valid(form)
 
 
 class GalleryList(TemplateView):
