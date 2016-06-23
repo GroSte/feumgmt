@@ -1,7 +1,8 @@
 from crispy_forms.helper import FormHelper
 from django import forms
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.translation import ugettext_lazy as _
-from crispy_forms.layout import Layout, Fieldset, Div, Submit
+from crispy_forms.layout import Layout, Submit
 from base.models import Mission, BreathingProtectionTraining
 
 
@@ -16,18 +17,16 @@ class BPTrainingForm(forms.ModelForm):
         model = BreathingProtectionTraining
         fields = ('date', 'location', 'participants')
 
+        widgets = {
+            'participants': FilteredSelectMultiple(_('Participants'), is_stacked=False),
+        }
+
     def __init__(self, *args, **kwargs):
         super(BPTrainingForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Div(
                 'date', 'location',
-                css_class='two-column'
-            ),
-            Div(
                 'participants',
-                css_class='two-column'
-            ),
             Submit('submit', _(u'Save'), css_class='btn-common btn-save'),
             Submit('cancel', _(u'Cancel'), css_class='btn-common btn-cancel'),
         )
