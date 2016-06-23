@@ -8,14 +8,32 @@
 
 body {
   background-color: #2E2E2E;
-  color: #DBE5ED;
+  color: #EBF5ED;
   font-family: ubuntu;
   margin-bottom: 20px; }
+
+a {
+  color: #1E90FF; }
+
+input[type="text"],
+input[type="password"],
+select {
+  color: #000; }
 
 h2 {
   color: #FFFFFF;
   margin-top: 10px;
   margin-bottom: 4px; }
+
+.logo > a > img {
+  height: 40px; }
+
+.logo > a > h2 {
+  margin-left: 1em;
+  display: inline-block; }
+
+.logo-col-highlight {
+  color: #FFA516; }
 
 h4 > .icon {
   height: 30px;
@@ -24,12 +42,51 @@ h4 > .icon {
 .top-bar {
   border-bottom: 1px solid #CCC; }
 
+.nav-pills {
+  padding: 0.4em 0.2em 0 0.5em; }
+
+.nav-pills > li > a {
+  border-radius: 2px;
+  padding: 0.5em 0.9em;
+  background-color: #1E90FF;
+  color: #FFF; }
+
+.nav-pills > li > a:focus,
+.nav-pills > li > a:hover {
+  background-color: #8BBFED;
+  color: #000; }
+
+.icon-bar {
+  font-size: 150%; }
+
 .dash-tile-container {
   padding: 8px; }
 
 .dash-tile {
-  padding: 14px;
+  padding: 0.7em;
   border: 1px dotted #888; }
+
+.content h2 {
+  padding: 0.3em 0; }
+
+.btn-primary {
+  background-color: #1E90FF; }
+
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: #8BBFED;
+  color: #000; }
+
+/* Forms */
+form {
+  padding: 0.4em 0.2em; }
+
+.control-label {
+  width: 25%; }
+
+.controls {
+  display: inline-block;
+  width: 50%; }
 
 .footer {
   border-top: 1px solid #CCC; }
