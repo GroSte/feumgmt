@@ -31,8 +31,7 @@
                     {% trans 'Next Breathing Protection Training' %}:
                 </h4>
                 {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
-                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i><br />
-                <a href="{% url 'bptraining_list' %}">{% trans 'Breathing Protection Trainings' %}</a>
+                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
@@ -41,7 +40,9 @@
                     <img src="{% static 'base/img/notepad.png' %}" class="icon" />
                     {% trans 'Current Hints' %}:
                 </h4>
-                Am 02.02.2019 findet der Handdruckspritzenwettbewerb in FTL statt.<br />
+                {{ next_message.subject }}<br />
+                {{ next_message.text }}<br />
+                <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br />
                 <a href="{% url 'gallery' %}">{% trans 'Gallery' %}</a>
             </div>
         </div>

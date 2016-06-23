@@ -51,13 +51,16 @@
                     {% block left-bar %}
                         <ul class="nav nav-pills">
                             <li role="presentation">
-                                <a href="{% url 'dashboard' %}">{% trans 'Home' %}</a>
+                                <a href="{% url 'dashboard' %}">{% trans 'Dashboard' %}</a>
                             </li>
                             <li role="presentation">
                                 <a href="{% url 'mission_list' %}">{% trans 'Missions' %}</a>
                             </li>
                             <li role="presentation">
                                 <a href="{% url 'bptraining_list' %}">{% trans 'Breathing Protection Trainings' %}</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="{% url 'message_list' %}">{% trans 'Messages' %}</a>
                             </li>
                             <li role="presentation">
                                 <a href="{% url 'mission_alarm' %}">{% trans 'Mission-Alarm' %}</a>
