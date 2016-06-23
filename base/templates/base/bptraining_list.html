@@ -36,7 +36,13 @@
                 <tbody>
                     {% for item in object_list %}
                         <tr>
-                            <td><a href="{% url 'bptraining_edit' item.id %}">{{ item.date|date:"d.m.Y" }}</a></td>
+                            <td>
+                                {% if perms.base.change_breathingprotectiontraining %}
+                                    <a href="{% url 'bptraining_edit' item.id %}">{{ item.date|date:"d.m.Y" }}</a>
+                                {% else %}
+                                    {{ item.date|date:"d.m.Y" }}
+                                {% endif %}
+                            </td>
                             <td>{{ item.location }}</td>
                             <td>{{ item.participants.all|join:', ' }}</td>
                         </tr>

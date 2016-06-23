@@ -24,7 +24,13 @@
                 <tbody>
                     {% for item in object_list %}
                         <tr>
-                            <td><a href="{% url 'mission_edit' item.id %}">{{ item.number }}</a></td>
+                            <td>
+                                {% if perms.base.change_mission %}
+                                    <a href="{% url 'mission_edit' item.id %}">{{ item.number }}</a>
+                                {% else %}
+                                    {{ item.number }}
+                                {% endif %}
+                            </td>
                             <td>{{ item.alarm_time }}</td>
                             <td>{{ item.keyword }} - {{ item.volume }}</td>
                             <td>{{ item.location }}</td>
