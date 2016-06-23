@@ -14,5 +14,8 @@ urlpatterns = [
     url(r'^bp-trainings/?$', views.BPTrainingList.as_view(), name='bptraining_list'),
     url(r'^bp-training/new$', views.BPTrainingCreate.as_view(), name='bptraining_new'),
     url(r'^bp-training/(?P<pk>\d+)?/?$', views.BPTrainingUpdate.as_view(), name='bptraining_edit'),
+    url(r'^message/?$', views.MessageList.as_view(), name='message_list'),
+    url(r'^message/new$', views.MessageCreate.as_view(), name='message_new'),
+    url(r'^message/(?P<pk>\d+)?/?$', views.MessageUpdate.as_view(), name='message_edit'),
     url(r'^gallery/?$', views.GalleryList.as_view(), name='gallery'),
 ]

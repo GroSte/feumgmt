@@ -1,0 +1,53 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {% trans 'Message' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{% trans 'Messages' %}</h2>
+        </div>
+    </div>
+
+    {% if perms.base.add_message %}
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{% url 'message_new' %}">
+                    <button type="button" class="btn btn-success btn-large">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        {% trans 'Create message' %}
+                    </button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Subject' %}</th>
+                        <th>{% trans 'Author' %}</th>
+                        <th>{% trans 'Creation Date' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in object_list %}
+                        <tr>
+                            <td>
+                                {% if perms.base.change_message %}
+                                    <a href="{% url 'message_edit' item.id %}">{{ item.subject }}</a></td>
+                                {% else %}
+                                    {{ item.subject }}
+                                {% endif %}
+                            <td>{{ item.author }}</td>
+                            <td>{{ item.creation_date|date:"d.m.Y" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

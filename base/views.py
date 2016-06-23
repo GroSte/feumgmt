@@ -13,9 +13,9 @@ from django.views.generic.edit import UpdateView, CreateView
 from geopy import Nominatim
 from os.path import isfile, join
 
-from base.forms import MissionForm, BPTrainingForm
+from base.forms import MissionForm, BPTrainingForm, MessageForm
 from base.geo_locator import GeoLocator
-from base.models import Mission, Training, BreathingProtectionTraining
+from base.models import Mission, Training, BreathingProtectionTraining, Message
 from feumgmt import settings
 
 
@@ -42,6 +42,10 @@ class Dashboard(TemplateView):
                 'location': next_bpt.location,
                 'participants': participants,
             }
+
+        next_message = Message.objects.all().order_by('-creation_date').first()
+        if next_message:
+            ctx['next_message'] = next_message
 
         return ctx
 
@@ -122,6 +126,37 @@ class BPTrainingUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
         return super(BPTrainingUpdate, self).form_valid(form)
+
+
+class MessageList(ListView):
+    model = Message
+    template_name = 'base/message_list.html'
+
+
+class MessageCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Message
+    success_url = reverse_lazy('message_list')
+    form_class = MessageForm
+    template_name = 'base/message_form.html'
+    permission_required = 'add_message'
+
+    def form_valid(self, form):
+        form.instance.author_id = self.request.user.id
+        form.instance.editor_id = self.request.user.id
+        form.instance.creation_date = timezone.now()
+        return super(MessageCreate, self).form_valid(form)
+
+
+class MessageUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Message
+    success_url = reverse_lazy('message_list')
+    form_class = MessageForm
+    template_name = 'base/message_form.html'
+    permission_required = 'change_message'
+
+    def form_valid(self, form):
+        form.instance.editor_id = self.request.user.id
+        return super(MessageUpdate, self).form_valid(form)
 
 
 class GalleryList(TemplateView):

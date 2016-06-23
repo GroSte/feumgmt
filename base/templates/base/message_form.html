@@ -1,0 +1,9 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n crispy_forms_tags %}
+
+{% block title %}{{ block.super }} | {% trans 'Message' %}{% endblock %}
+
+{% block content %}
+    {{ form.media }}
+    {% crispy form %}
+{% endblock %}
