@@ -4,27 +4,45 @@
 {% block title %}{{ block.super }} | {% trans 'Breathing Protection Training' %}{% endblock %}
 
 {% block content %}
-    <h2>{% trans 'Breathing Protection Trainings' %}</h2>
-    <a href="{% url 'bptraining_new' %}">
-        <button type="button" class="btn btn-primary btn-sm">
-            <span class="glyphicon glyphicon-file"></span>
-            {% trans 'Create breathing protection training' %}
-        </button>
-    </a>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>{% trans 'Date' %}</th>
-                <th>{% trans 'Location' %}</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in object_list %}
-                <tr>
-                    <td><a href="{% url 'bptraining_edit' item.id %}">{{ item.date|date:"d.m.Y" }}</a></td>
-                    <td>{{ item.location }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{% trans 'Breathing Protection Trainings' %}</h2>
+        </div>
+    </div>
+
+    {% if perms.base.add_breathingprotectiontraining %}
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{% url 'bptraining_new' %}">
+                    <button type="button" class="btn btn-primary btn-large">
+                        <span class="glyphicon glyphicon-file"></span>
+                        {% trans 'Create breathing protection training' %}
+                    </button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Date' %}</th>
+                        <th>{% trans 'Location' %}</th>
+                        <th>{% trans 'Participants' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in object_list %}
+                        <tr>
+                            <td><a href="{% url 'bptraining_edit' item.id %}">{{ item.date|date:"d.m.Y" }}</a></td>
+                            <td>{{ item.location }}</td>
+                            <td>{{ item.participants.all|join:', ' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

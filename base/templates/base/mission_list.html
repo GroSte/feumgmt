@@ -4,27 +4,35 @@
 {% block title %}{{ block.super }} | {% trans 'Mission' %}{% endblock %}
 
 {% block content %}
-    <h2>{% trans 'Missions' %}</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>{% trans 'Number' %}</th>
-                <th>{% trans 'Alarm Time' %}</th>
-                <th>{% trans 'Keyword' %}</th>
-                <th>{% trans 'Location' %}</th>
-                <th>{% trans 'Street' %}</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in object_list %}
-                <tr>
-                    <td><a href="{% url 'mission_edit' item.id %}">{{ item.number }}</a></td>
-                    <td>{{ item.alarm_time }}</td>
-                    <td>{{ item.keyword }} - {{ item.volume }}</td>
-                    <td>{{ item.location }}</td>
-                    <td>{{ item.street }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{% trans 'Missions' %}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Number' %}</th>
+                        <th>{% trans 'Alarm Time' %}</th>
+                        <th>{% trans 'Keyword' %}</th>
+                        <th>{% trans 'Location' %}</th>
+                        <th>{% trans 'Street' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in object_list %}
+                        <tr>
+                            <td><a href="{% url 'mission_edit' item.id %}">{{ item.number }}</a></td>
+                            <td>{{ item.alarm_time }}</td>
+                            <td>{{ item.keyword }} - {{ item.volume }}</td>
+                            <td>{{ item.location }}</td>
+                            <td>{{ item.street }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}
