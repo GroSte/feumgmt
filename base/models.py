@@ -121,4 +121,4 @@ class Mission(models.Model):
         verbose_name_plural = _('Missions')
 
     def __unicode__(self):
-        return '{0} / {1} - {2}'.format(self.number, self.keyword, self.location)
+        return '{0}-{1}-{2} {3}'.format(self.keyword, self.volume, self.concerned, self.location)
