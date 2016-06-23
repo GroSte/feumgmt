@@ -24,7 +24,8 @@ a {
 
 input[type="text"],
 input[type="password"],
-select {
+select,
+textarea {
   color: #000;
 }
 
@@ -90,6 +91,11 @@ h4 > .icon {
   padding: 0.3em 0;
 }
 
+.table th {
+  background-color: $font-color-global;
+  color: #000;
+}
+
 .btn-primary {
   background-color: $link-color-global;
 }
@@ -111,9 +117,20 @@ form {
 
 .controls {
   display: inline-block;
-  width: 50%;
+  width: 70%;
 }
 
 .footer {
   border-top: 1px solid #CCC;
+}
+
+@media (max-width: 768px) {
+  .control-label {
+    width: 100%;
+  }
+
+  .controls {
+    display: inline-block;
+    width: 100%;
+  }
 }

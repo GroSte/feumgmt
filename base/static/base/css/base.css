@@ -17,7 +17,8 @@ a {
 
 input[type="text"],
 input[type="password"],
-select {
+select,
+textarea {
   color: #000; }
 
 h2 {
@@ -69,6 +70,10 @@ h4 > .icon {
 .content h2 {
   padding: 0.3em 0; }
 
+.table th {
+  background-color: #EBF5ED;
+  color: #000; }
+
 .btn-primary {
   background-color: #1E90FF; }
 
@@ -86,9 +91,17 @@ form {
 
 .controls {
   display: inline-block;
-  width: 50%; }
+  width: 70%; }
 
 .footer {
   border-top: 1px solid #CCC; }
+
+@media (max-width: 768px) {
+  .control-label {
+    width: 100%; }
+
+  .controls {
+    display: inline-block;
+    width: 100%; } }
 
 /*# sourceMappingURL=base.css.map */
