@@ -31,7 +31,8 @@
                     {% trans 'Next Breathing Protection Training' %}:
                 </h4>
                 {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
-                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i>
+                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i><br />
+                <a href="{% url 'gallery' %}">{% trans 'Gallery' %}</a>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
@@ -42,8 +43,7 @@
                 </h4>
                 {{ next_message.subject }}<br />
                 {{ next_message.text }}<br />
-                <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br />
-                <a href="{% url 'gallery' %}">{% trans 'Gallery' %}</a>
+                <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i>
             </div>
         </div>
     </div>
