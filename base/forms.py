@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Layout, Submit
-from base.models import Mission, BreathingProtectionTraining
+from base.models import Mission, BreathingProtectionTraining, Message
 
 
 class MissionForm(forms.ModelForm):
@@ -25,8 +25,22 @@ class BPTrainingForm(forms.ModelForm):
         super(BPTrainingForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-                'date', 'location',
-                'participants',
+            'date', 'location', 'participants',
+            Submit('submit', _(u'Save'), css_class='btn-common btn-save'),
+            Submit('cancel', _(u'Cancel'), css_class='btn-common btn-cancel'),
+        )
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ('subject', 'text', 'expiration_date')
+
+    def __init__(self, *args, **kwargs):
+        super(MessageForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'subject', 'text','expiration_date',
             Submit('submit', _(u'Save'), css_class='btn-common btn-save'),
             Submit('cancel', _(u'Cancel'), css_class='btn-common btn-cancel'),
         )

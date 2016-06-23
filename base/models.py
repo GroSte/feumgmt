@@ -122,3 +122,23 @@ class Mission(models.Model):
 
     def __unicode__(self):
         return '{0}-{1}-{2} {3}'.format(self.keyword, self.volume, self.concerned, self.location)
+
+
+class Message(models.Model):
+    subject = models.CharField(max_length=200, verbose_name=_('Subject'))
+    text = models.TextField(verbose_name=_('Text'))
+    expiration_date = models.DateField(null=True, blank=True, verbose_name=_('Expiration Date'))
+    author = models.ForeignKey(UserProfile, related_name='message_author',
+                               verbose_name=_('Author'))
+
+    editor = models.ForeignKey(UserProfile, null=True, blank=True, related_name='message_editor',
+                               verbose_name=_('Editor'))
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
+
+    class Meta:
+        verbose_name = _('Message')
+        verbose_name_plural = _('Messages')
+
+    def __unicode__(self):
+        return '{0} ({1})'.format(self.subject, self.author)
