@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Layout, Submit
-from base.models import Mission, BreathingProtectionTraining, Message
+from base.models import Mission, BreathingProtectionTraining, Message, UserProfile
 
 
 class MissionForm(forms.ModelForm):
@@ -43,6 +43,8 @@ class BPTrainingForm(forms.ModelForm):
             Submit('submit', _(u'Save'), css_class='btn-success'),
             Submit('cancel', _(u'Cancel'), css_class='btn-abort'),
         )
+        self.fields['participants'].queryset = UserProfile.objects.filter(
+            breathing_protection_carrier=True)
 
 
 class MessageForm(forms.ModelForm):
