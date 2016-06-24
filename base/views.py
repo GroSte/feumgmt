@@ -27,7 +27,7 @@ class Dashboard(TemplateView):
 
         next_training = Training.objects.all().order_by('-date').first()
         if next_training:
-            responsibles = ','.join([str(f) for f in next_training.responsibles.all()])
+            responsibles = ','.join([unicode(f) for f in next_training.responsibles.all()])
             ctx['next_training'] = {
                 'date': next_training.date,
                 'subject': next_training.subject,
