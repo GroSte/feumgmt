@@ -1,0 +1,10 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n leaflet_tags geojson_tags crispy_forms_tags %}
+
+{% block title %}{{ block.super }} | {% trans 'Breathing Protection Carrier' %}{% endblock %}
+
+{% block content %}
+    <h3>{% trans 'Edit' %}: {{ form.instance.user.user }}</h3>
+    {{ form.media }}
+    {% crispy form %}
+{% endblock %}

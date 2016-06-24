@@ -13,9 +13,9 @@ from django.views.generic.edit import UpdateView, CreateView
 from geopy import Nominatim
 from os.path import isfile, join
 
-from base.forms import MissionForm, BPTrainingForm, MessageForm
+from base.forms import MissionForm, BPTrainingForm, MessageForm, BPCarrierForm
 from base.geo_locator import GeoLocator
-from base.models import Mission, Training, BreathingProtectionTraining, Message
+from base.models import Mission, Training, BreathingProtectionTraining, Message, UserProfile
 from feumgmt import settings
 
 
@@ -157,6 +157,27 @@ class MessageUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
         return super(MessageUpdate, self).form_valid(form)
+
+
+class BPCarrierList(ListView):
+    model = UserProfile
+    template_name = 'base/bpcarrier_list.html'
+
+    def get_queryset(self):
+        queryset = super(BPCarrierList, self).get_queryset()
+        return queryset.filter(breathing_protection_carrier=True)
+
+
+class BPCarrierUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = UserProfile
+    success_url = reverse_lazy('bpcarrier_list')
+    form_class = BPCarrierForm
+    template_name = 'base/bpcarrier_form.html'
+    permission_required = 'change_userprofile'
+
+    def form_valid(self, form):
+        form.instance.editor_id = self.request.user.id
+        return super(BPCarrierUpdate, self).form_valid(form)
 
 
 class GalleryList(TemplateView):

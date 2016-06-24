@@ -1,0 +1,43 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {% trans 'Breathing Protection Carriers' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{% trans 'Breathing Protection Carriers' %}</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Next Medical Examination Date' %}</th>
+                        <th>{% trans 'Next Breathing Protection Training Date' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in object_list %}
+                        <tr>
+                            <td>
+                                {% if perms.base.change_userprofile %}
+                                    <a href="{% url 'bpcarrier_edit' item.id %}">
+                                        {{ item }}
+                                    </a>
+                                {% else %}
+                                    {{ item }}
+                                {% endif %}
+                            </td>
+                            <td>{{ item.next_medical_examination_date|date:"d.m.Y" }}</td>
+                            <td>{{ item.next_breathing_protection_training_date|date:"d.m.Y" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
