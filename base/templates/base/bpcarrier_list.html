@@ -24,7 +24,7 @@
                     {% for item in object_list %}
                         <tr>
                             <td>
-                                {% if perms.base.change_userprofile %}
+                                {% if perms.base.change_breathingprotectioncarrier %}
                                     <a href="{% url 'bpcarrier_edit' item.id %}">
                                         {{ item }}
                                     </a>
