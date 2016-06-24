@@ -1,5 +1,6 @@
 @import "variables";
 
+/* Global styles */
 @font-face {
     font-family: 'ubuntu';
     src: url('../fonts/Ubuntu-R.ttf');
@@ -22,6 +23,12 @@ a {
   color: $link-color-global;
 }
 
+a:focus,
+a:hover {
+  color: $link-color-highlight-global;
+  text-decoration: none;
+}
+
 input[type="text"],
 input[type="password"],
 select,
@@ -35,6 +42,7 @@ h2 {
     margin-bottom: 4px;
 }
 
+/* Header styles */
 .logo > a > img {
   height: 40px;
 }
@@ -45,7 +53,7 @@ h2 {
 }
 
 .logo-col-highlight {
-  color: $logo-color-highlight;
+  color: $link-color-global;
 }
 
 h4 > .icon {
@@ -64,13 +72,13 @@ h4 > .icon {
 .nav-pills > li > a {
   border-radius: 2px;
   padding: 0.5em 0.9em;
-  background-color: $link-color-global;
+  background-color: $menu-color-background;
   color: #FFF;
 }
 
 .nav-pills > li > a:focus,
 .nav-pills > li > a:hover {
-  background-color: $link-color-highlight-global;
+  background-color: $link-color-global;
   color: #000;
 }
 
@@ -78,6 +86,7 @@ h4 > .icon {
   font-size: 150%;
 }
 
+/* Dashboard styles */
 .dash-tile-container {
   padding: 8px;
 }
@@ -91,18 +100,95 @@ h4 > .icon {
   padding: 0.3em 0;
 }
 
+/* List styles */
 .table th {
   background-color: $font-color-global;
   color: #000;
 }
 
 .btn-primary {
-  background-color: $link-color-global;
+  background-color: inherit;
+  border: none;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  background-color: inherit;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: inherit;
+  border: none;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-color: inherit;
+  border: none;
+}
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary.focus {
+  background-color: inherit;
+  border: none;
 }
 
 .btn-primary:focus,
 .btn-primary:hover {
-  background-color: $link-color-highlight-global;
+  background-color: inherit;
+}
+
+.btn-success {
+  background-color: $menu-color-background;
+  border: none;
+}
+
+.btn-success:focus,
+.btn-success.focus {
+  background-color: $link-color-global;
+  color: #000;
+  border: none;
+}
+.btn-success:hover {
+  background-color: $link-color-global;
+  color: #000;
+  border: none;
+}
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+  background-color: $link-color-global;
+  color: #000;
+  border: none;
+}
+.btn-success:active:hover,
+.btn-success.active:hover,
+.open > .dropdown-toggle.btn-success:hover,
+.btn-success:active:focus,
+.btn-success.active:focus,
+.open > .dropdown-toggle.btn-success:focus,
+.btn-success:active.focus,
+.btn-success.active.focus,
+.open > .dropdown-toggle.btn-success.focus {
+  background-color: $link-color-global;
+  color: #000;
+  border: none;
+}
+
+.btn-abort {
+  background-color:#999;
+  border: none;
+}
+
+.btn-abort:focus,
+.btn-abort:hover {
+  background-color: #CCC;
   color: #000;
 }
 
@@ -120,10 +206,15 @@ form {
   width: 70%;
 }
 
+.leaflet-popup-content {
+    color: #000;
+}
+
 .footer {
   border-top: 1px solid #CCC;
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
   .control-label {
     width: 100%;
