@@ -34,11 +34,56 @@ class UserProfile(models.Model):
         return '{0} {1}'.format(self.user.first_name, self.user.last_name)
 
 
+class Municipality(models.Model):
+    name = models.CharField(max_length=200, verbose_name=_('Name'))
+    chief = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Chief'))  # Gemeindewehrleiter
+    street = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Street'))  # Strasse
+    location = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Location'))  # Ort
+    phone_number = models.CharField(max_length=25, blank=True, null=True,
+                                    verbose_name=_('Phone Number'))
+
+    editor = models.ForeignKey(UserProfile, null=True, blank=True,
+                               related_name='municipality_editor', verbose_name=_('Editor'))
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
+
+    class Meta:
+        verbose_name = _('Municipality')
+        verbose_name_plural = _('Municipalities')
+
+    def __unicode__(self):
+        return self.name
+
+
+class FireHouse(models.Model):
+    name = models.CharField(max_length=200, verbose_name=_('Name'))
+    chief = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Chief'))  # Wehrleiter
+    street = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Street'))  # Strasse
+    location = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Location'))  # Ort
+    phone_number = models.CharField(max_length=25, blank=True, null=True,
+                                    verbose_name=_('Phone Number'))
+    municipality = models.ForeignKey(Municipality, null=True, blank=True,
+                                     verbose_name=_('Municipality'))
+
+    editor = models.ForeignKey(UserProfile, null=True, blank=True,
+                               related_name='fire_house_editor', verbose_name=_('Editor'))
+    creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
+    last_update = models.DateTimeField(null=True, auto_now=True, verbose_name=_('Last update'))
+
+    class Meta:
+        verbose_name = _('Fire House')
+        verbose_name_plural = _('Fire Houses')
+
+    def __unicode__(self):
+        return self.name
+
+
 class Vehicle(models.Model):
     call_sign = models.CharField(max_length=100, verbose_name=_('Call Sign'))  # Kenner
     crew = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Crew'))  # Besatzung
     number_plate = models.CharField(blank=True, null=True, max_length=20,
                                     verbose_name=_('Number Plate'))  # Kennzeichen
+    fire_house = models.ForeignKey(FireHouse, null=True, blank=True, verbose_name=_('Fire House'))
 
     editor = models.ForeignKey(UserProfile, null=True, blank=True, verbose_name=_('Editor'))
     creation_date = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation date'))
