@@ -9,7 +9,21 @@ from base.models import Mission, BreathingProtectionTraining, Message
 class MissionForm(forms.ModelForm):
     class Meta:
         model = Mission
-        fields = '__all__'
+        fields = ('number', 'alarm_time', 'keyword', 'description', 'volume', 'concerned', 'name',
+                  'street', 'location', 'signal', 'vehicles', 'firefighters')
+
+        widgets = {
+            'vehicles': FilteredSelectMultiple(_('Vehicles'), is_stacked=False),
+            'firefighters': FilteredSelectMultiple(_('Firefighters'), is_stacked=False),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(MissionForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'number', 'alarm_time', 'keyword', 'description', 'volume', 'concerned', 'name',
+            'street', 'location', 'signal', 'vehicles', 'firefighters',
+        )
 
 
 class BPTrainingForm(forms.ModelForm):
@@ -26,8 +40,8 @@ class BPTrainingForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             'date', 'location', 'participants',
-            Submit('submit', _(u'Save'), css_class='btn-common btn-save'),
-            Submit('cancel', _(u'Cancel'), css_class='btn-common btn-cancel'),
+            Submit('submit', _(u'Save'), css_class='btn-success'),
+            Submit('cancel', _(u'Cancel'), css_class='btn-abort'),
         )
 
 
@@ -41,6 +55,6 @@ class MessageForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             'subject', 'text','expiration_date',
-            Submit('submit', _(u'Save'), css_class='btn-common btn-save'),
-            Submit('cancel', _(u'Cancel'), css_class='btn-common btn-cancel'),
+            Submit('submit', _(u'Save'), css_class='btn-success'),
+            Submit('cancel', _(u'Cancel'), css_class='btn-abort'),
         )
