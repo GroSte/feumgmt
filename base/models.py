@@ -16,8 +16,16 @@ class UserProfile(models.Model):
                                            verbose_name=_('Mobile Phone Number'))
     birth_date = models.DateField(max_length=45, blank=True, null=True,
                                   verbose_name=_('Birth Date'))
-    admittance = models.DateField(max_length=45, blank=True, null=True,
-                                  verbose_name=_('Admittance'))
+    admittance_date = models.DateField(blank=True, null=True,
+                                       verbose_name=_('Admittance Date'))  # Eintrittsdatum
+    breathing_protection_carrier = models.BooleanField(
+        default=False,
+        verbose_name=_('Breathing Protection Carrier'))  # ASG-Traeger
+    next_medical_examination_date = models.DateField(
+        blank=True, null=True, verbose_name=_('Next Medical Examination Date'))  # naechste G26
+    next_breathing_protection_training_date = models.DateField(
+        blank=True, null=True,
+        verbose_name=_('Next Breathing Protection Training Date'))  # naechster ASUE-Termin
     online = models.BooleanField(default=False, verbose_name=_('Online'))
     online_date = models.DateTimeField(blank=True, null=True, verbose_name=_('Online date'))
     online_ip = models.CharField(max_length=15, blank=True, null=True, verbose_name=_('Online IP'))
@@ -36,9 +44,12 @@ class UserProfile(models.Model):
 
 class Municipality(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
-    chief = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Chief'))  # Gemeindewehrleiter
-    street = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Street'))  # Strasse
-    location = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Location'))  # Ort
+    chief = models.CharField(max_length=200, null=True, blank=True,
+                             verbose_name=_('Chief'))  # Gemeindewehrleiter
+    street = models.CharField(max_length=200, null=True, blank=True,
+                              verbose_name=_('Street'))  # Strasse
+    location = models.CharField(max_length=200, null=True, blank=True,
+                                verbose_name=_('Location'))  # Ort
     phone_number = models.CharField(max_length=25, blank=True, null=True,
                                     verbose_name=_('Phone Number'))
 
@@ -57,9 +68,12 @@ class Municipality(models.Model):
 
 class FireHouse(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
-    chief = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Chief'))  # Wehrleiter
-    street = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Street'))  # Strasse
-    location = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Location'))  # Ort
+    chief = models.CharField(max_length=200, null=True, blank=True,
+                             verbose_name=_('Chief'))  # Wehrleiter
+    street = models.CharField(max_length=200, null=True, blank=True,
+                              verbose_name=_('Street'))  # Strasse
+    location = models.CharField(max_length=200, null=True, blank=True,
+                                verbose_name=_('Location'))  # Ort
     phone_number = models.CharField(max_length=25, blank=True, null=True,
                                     verbose_name=_('Phone Number'))
     municipality = models.ForeignKey(Municipality, null=True, blank=True,
@@ -80,7 +94,8 @@ class FireHouse(models.Model):
 
 class Vehicle(models.Model):
     call_sign = models.CharField(max_length=100, verbose_name=_('Call Sign'))  # Kenner
-    crew = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Crew'))  # Besatzung
+    crew = models.CharField(blank=True, null=True, max_length=20,
+                            verbose_name=_('Crew'))  # Besatzung
     number_plate = models.CharField(blank=True, null=True, max_length=20,
                                     verbose_name=_('Number Plate'))  # Kennzeichen
     fire_house = models.ForeignKey(FireHouse, null=True, blank=True, verbose_name=_('Fire House'))
@@ -140,12 +155,17 @@ class BreathingProtectionTraining(models.Model):
 
 
 class Mission(models.Model):
-    number = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Number'))  # Einsatz-Nummer
+    number = models.CharField(blank=True, null=True, max_length=20,
+                              verbose_name=_('Number'))  # Einsatz-Nummer
     alarm_time = models.DateTimeField(verbose_name=_('Alarm Time'))  # Alarmierungszeit
-    keyword = models.CharField(max_length=100, verbose_name=_('Keyword'), db_index=True)  # Stichwort
-    description = models.TextField(blank=True, null=True, verbose_name=_('Description'))  # Beschreibung
-    volume = models.CharField(blank=True, null=True, max_length=100, verbose_name=_('Volume'))  # Umfang, Groesse
-    concerned = models.CharField(blank=True, null=True, max_length=20, verbose_name=_('Concerned'))  # Betroffene
+    keyword = models.CharField(max_length=100, verbose_name=_('Keyword'),
+                               db_index=True)  # Stichwort
+    description = models.TextField(blank=True, null=True,
+                                   verbose_name=_('Description'))  # Beschreibung
+    volume = models.CharField(blank=True, null=True, max_length=100,
+                              verbose_name=_('Volume'))  # Umfang, Groesse
+    concerned = models.CharField(blank=True, null=True, max_length=20,
+                                 verbose_name=_('Concerned'))  # Betroffene
     name = models.CharField(blank=True, null=True, max_length=200, verbose_name=_('Name'))  # Name
     street = models.CharField(max_length=200, verbose_name=_('Street'))  # Strasse
     location = models.CharField(max_length=200, verbose_name=_('Location'))  # Ort
