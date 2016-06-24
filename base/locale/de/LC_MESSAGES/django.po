@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-23 11:44+0200\n"
-"PO-Revision-Date: 2016-06-23 11:46+0100\n"
+"POT-Creation-Date: 2016-06-24 09:50+0200\n"
+"PO-Revision-Date: 2016-06-24 09:52+0100\n"
 "Last-Translator: Steve Gröber <steve.groeber@shd-online.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,17 +18,26 @@ msgstr ""
 "Language: de\n"
 "X-Generator: Poedit 1.8.1\n"
 
-#: .\base\forms.py:21 .\base\models.py:83
+#: .\base\forms.py:17 .\base\models.py:109 .\base\models.py:174
+#: .\base\templates\base\mission_alarm.html:53
+msgid "Vehicles"
+msgstr "Fahrzeuge"
+
+#: .\base\forms.py:18 .\base\models.py:177
+msgid "Firefighters"
+msgstr "Feuerwehrmänner"
+
+#: .\base\forms.py:36 .\base\models.py:143
 #: .\base\templates\base\bptraining_list.html:33
 #: .\base\templates\base\dashboard.html:34
 msgid "Participants"
 msgstr "Teilnehmer"
 
-#: .\base\forms.py:29 .\base\forms.py:44
+#: .\base\forms.py:44 .\base\forms.py:62 .\base\forms.py:84
 msgid "Save"
 msgstr "Speichern"
 
-#: .\base\forms.py:30 .\base\forms.py:45
+#: .\base\forms.py:45 .\base\forms.py:63 .\base\forms.py:85
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -44,7 +53,7 @@ msgstr "{0} min {1} s"
 msgid "Grade"
 msgstr "Dienstgrad"
 
-#: .\base\models.py:14
+#: .\base\models.py:14 .\base\models.py:54 .\base\models.py:78
 msgid "Phone Number"
 msgstr "Telefonnummer"
 
@@ -57,187 +66,214 @@ msgid "Birth Date"
 msgstr "Gebutsdatum"
 
 #: .\base\models.py:20
-msgid "Admittance"
+msgid "Admittance Date"
 msgstr "Eintrittsdatum"
 
-#: .\base\models.py:21
+#: .\base\models.py:23 .\base\templates\base\bpcarrier_form.html:4
+msgid "Breathing Protection Carrier"
+msgstr "Atemschutzgeräteträger"
+
+#: .\base\models.py:25 .\base\templates\base\bpcarrier_list.html:19
+msgid "Next Medical Examination Date"
+msgstr "Nächste Ärztliche Untersuchung"
+
+#: .\base\models.py:28 .\base\templates\base\bpcarrier_list.html:20
+msgid "Next Breathing Protection Training Date"
+msgstr "Nächster Termin Atemschutzübungsstrecke"
+
+#: .\base\models.py:29
 msgid "Online"
 msgstr "Online"
 
-#: .\base\models.py:22
+#: .\base\models.py:30
 msgid "Online date"
 msgstr "Online-Datum"
 
-#: .\base\models.py:23
+#: .\base\models.py:31
 msgid "Online IP"
 msgstr "Online-IP"
 
-#: .\base\models.py:25 .\base\models.py:44 .\base\models.py:65
-#: .\base\models.py:86 .\base\models.py:116 .\base\models.py:136
+#: .\base\models.py:33 .\base\models.py:58 .\base\models.py:84
+#: .\base\models.py:104 .\base\models.py:125 .\base\models.py:146
+#: .\base\models.py:181 .\base\models.py:201
 msgid "Creation date"
 msgstr "Erstellungsdatum"
 
-#: .\base\models.py:26 .\base\models.py:45 .\base\models.py:66
-#: .\base\models.py:87 .\base\models.py:117 .\base\models.py:137
+#: .\base\models.py:34 .\base\models.py:59 .\base\models.py:85
+#: .\base\models.py:105 .\base\models.py:126 .\base\models.py:147
+#: .\base\models.py:182 .\base\models.py:202
 msgid "Last update"
 msgstr "Letzte Aktualisierung"
 
-#: .\base\models.py:30
+#: .\base\models.py:38
 msgid "User"
 msgstr "Benutzer"
 
-#: .\base\models.py:31
+#: .\base\models.py:39
 msgid "Users"
 msgstr "Benutzer"
 
-#: .\base\models.py:38
-msgid "Call Sign"
-msgstr "Funkrufname"
+#: .\base\models.py:46 .\base\models.py:70 .\base\models.py:169
+#: .\base\templates\base\bpcarrier_list.html:18
+msgid "Name"
+msgstr "Name"
 
-#: .\base\models.py:39
-msgid "Crew"
-msgstr "Besatzung"
+#: .\base\models.py:48 .\base\models.py:72
+msgid "Chief"
+msgstr "Wehrleiter"
 
-#: .\base\models.py:41
-msgid "Number Plate"
-msgstr "KFZ-Kennzeichen"
+#: .\base\models.py:50 .\base\models.py:74 .\base\models.py:170
+#: .\base\templates\base\mission_list.html:21
+msgid "Street"
+msgstr "Straße"
 
-#: .\base\models.py:43 .\base\models.py:64 .\base\models.py:85
-#: .\base\models.py:115 .\base\models.py:135
+#: .\base\models.py:52 .\base\models.py:76 .\base\models.py:138
+#: .\base\models.py:171 .\base\templates\base\bptraining_list.html:32
+#: .\base\templates\base\mission_list.html:20
+msgid "Location"
+msgstr "Ort"
+
+#: .\base\models.py:57 .\base\models.py:83 .\base\models.py:103
+#: .\base\models.py:124 .\base\models.py:145 .\base\models.py:180
+#: .\base\models.py:200
 msgid "Editor"
 msgstr "Bearbeiter"
 
-#: .\base\models.py:48
+#: .\base\models.py:62 .\base\models.py:80
+msgid "Municipality"
+msgstr "Kommune"
+
+#: .\base\models.py:63
+msgid "Municipalities"
+msgstr "Kommunen"
+
+#: .\base\models.py:88 .\base\models.py:101
+msgid "Fire House"
+msgstr "Gerätehaus"
+
+#: .\base\models.py:89
+msgid "Fire Houses"
+msgstr "Gerätehäuser"
+
+#: .\base\models.py:96
+msgid "Call Sign"
+msgstr "Funkrufname"
+
+#: .\base\models.py:98
+msgid "Crew"
+msgstr "Besatzung"
+
+#: .\base\models.py:100
+msgid "Number Plate"
+msgstr "KFZ-Kennzeichen"
+
+#: .\base\models.py:108
 msgid "Vehicle"
 msgstr "Fahrzeug"
 
-#: .\base\models.py:49 .\base\models.py:109
-#: .\base\templates\base\mission_alarm.html:53
-msgid "Vehicles"
-msgstr "Fahrzeuge"
-
-#: .\base\models.py:56 .\base\models.py:77
+#: .\base\models.py:116 .\base\models.py:137
 #: .\base\templates\base\bptraining_list.html:31
 msgid "Date"
 msgstr "Datum"
 
-#: .\base\models.py:57 .\base\models.py:128
+#: .\base\models.py:117 .\base\models.py:193
 #: .\base\templates\base\dashboard.html:23
 #: .\base\templates\base\message_list.html:31
 msgid "Subject"
 msgstr "Thema"
 
-#: .\base\models.py:58
+#: .\base\models.py:118
 msgid "Note"
 msgstr "Hinweis"
 
-#: .\base\models.py:61 .\base\templates\base\dashboard.html:24
+#: .\base\models.py:121 .\base\templates\base\dashboard.html:24
 msgid "Responsibles"
 msgstr "Verantwortliche"
 
-#: .\base\models.py:69
+#: .\base\models.py:129
 msgid "Training"
 msgstr "Ausbildung"
 
-#: .\base\models.py:70
+#: .\base\models.py:130
 msgid "Trainings"
 msgstr "Ausbildungen"
 
-#: .\base\models.py:78 .\base\models.py:106
-#: .\base\templates\base\bptraining_list.html:32
-#: .\base\templates\base\mission_list.html:20
-msgid "Location"
-msgstr "Ort"
-
-#: .\base\models.py:79
+#: .\base\models.py:139
 msgid "Organizer"
 msgstr "Organisator"
 
-#: .\base\models.py:90 .\base\templates\base\bptraining_form.html:4
+#: .\base\models.py:150 .\base\templates\base\bptraining_form.html:4
 #: .\base\templates\base\bptraining_list.html:4
 msgid "Breathing Protection Training"
 msgstr "Atemschutzausbildung"
 
-#: .\base\models.py:91 .\base\templates\base\__base.html:60
+#: .\base\models.py:151 .\base\templates\base\__base.html:60
 #: .\base\templates\base\bptraining_list.html:9
-#: .\base\templates\base\dashboard.html:35
 msgid "Breathing Protection Trainings"
 msgstr "Atemschutzausbildungen"
 
-#: .\base\models.py:98 .\base\templates\base\mission_list.html:17
+#: .\base\models.py:159 .\base\templates\base\mission_list.html:17
 msgid "Number"
 msgstr "Nummer"
 
-#: .\base\models.py:99 .\base\templates\base\mission_list.html:18
+#: .\base\models.py:160 .\base\templates\base\mission_list.html:18
 msgid "Alarm Time"
 msgstr "Alarmzeit"
 
-#: .\base\models.py:100 .\base\templates\base\mission_list.html:19
+#: .\base\models.py:161 .\base\templates\base\mission_list.html:19
 msgid "Keyword"
 msgstr "Stichwort"
 
-#: .\base\models.py:101
+#: .\base\models.py:164
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\base\models.py:102
+#: .\base\models.py:166
 msgid "Volume"
 msgstr "Umfang"
 
-#: .\base\models.py:103
+#: .\base\models.py:168
 msgid "Concerned"
 msgstr "Betroffene"
 
-#: .\base\models.py:104
-msgid "Name"
-msgstr "Name"
-
-#: .\base\models.py:105 .\base\templates\base\mission_list.html:21
-msgid "Street"
-msgstr "Straße"
-
-#: .\base\models.py:107
+#: .\base\models.py:172
 msgid "Coordinates"
 msgstr "Koordinaten"
 
-#: .\base\models.py:108 .\base\templates\base\mission_alarm.html:41
+#: .\base\models.py:173 .\base\templates\base\mission_alarm.html:41
 #: .\base\templates\base\mission_alarm.html:45
 msgid "Signal"
 msgstr "Sondersignal"
 
-#: .\base\models.py:112
-msgid "Firefighters"
-msgstr "Feuerwehrmänner"
-
-#: .\base\models.py:120 .\base\templates\base\mission_alarm.html:4
+#: .\base\models.py:185 .\base\templates\base\mission_alarm.html:4
 #: .\base\templates\base\mission_form.html:4
 #: .\base\templates\base\mission_list.html:4
 msgid "Mission"
 msgstr "Einsatz"
 
-#: .\base\models.py:121 .\base\templates\base\__base.html:57
+#: .\base\models.py:186 .\base\templates\base\__base.html:57
 #: .\base\templates\base\mission_list.html:9
 msgid "Missions"
 msgstr "Einsätze"
 
-#: .\base\models.py:129
+#: .\base\models.py:194
 msgid "Text"
 msgstr "Text"
 
-#: .\base\models.py:130
+#: .\base\models.py:195
 msgid "Expiration Date"
 msgstr "Ablaufdatum"
 
-#: .\base\models.py:132 .\base\templates\base\message_list.html:32
+#: .\base\models.py:197 .\base\templates\base\message_list.html:32
 msgid "Author"
 msgstr "Verfasser"
 
-#: .\base\models.py:140 .\base\templates\base\message_form.html:4
+#: .\base\models.py:205 .\base\templates\base\message_form.html:4
 #: .\base\templates\base\message_list.html:4
 msgid "Message"
 msgstr "Mitteilung"
 
-#: .\base\models.py:141 .\base\templates\base\__base.html:63
+#: .\base\models.py:206 .\base\templates\base\__base.html:66
 #: .\base\templates\base\message_list.html:9
 msgid "Messages"
 msgstr "Mitteilungen"
@@ -250,9 +286,19 @@ msgstr "FiT"
 msgid "Dashboard"
 msgstr "Anschlagtafel"
 
-#: .\base\templates\base\__base.html:66
+#: .\base\templates\base\__base.html:63
+#: .\base\templates\base\bpcarrier_list.html:4
+#: .\base\templates\base\bpcarrier_list.html:9
+msgid "Breathing Protection Carriers"
+msgstr "Atemschutzgeräteträger"
+
+#: .\base\templates\base\__base.html:69
 msgid "Mission-Alarm"
 msgstr "Einsatzalarm"
+
+#: .\base\templates\base\bpcarrier_form.html:7
+msgid "Edit"
+msgstr "Bearbeite"
 
 #: .\base\templates\base\bptraining_list.html:19
 msgid "Create breathing protection training"
@@ -270,33 +316,33 @@ msgstr "Nächste Atemschutzausbildung"
 msgid "in"
 msgstr "in"
 
-#: .\base\templates\base\dashboard.html:42
-msgid "Current Hints"
-msgstr "Aktuelle Hinweise"
-
-#: .\base\templates\base\dashboard.html:47
+#: .\base\templates\base\dashboard.html:35
 #: .\base\templates\base\gallery_list.html:4
 #: .\base\templates\base\gallery_list.html:7
 msgid "Gallery"
 msgstr "Galerie"
 
-#: .\base\templates\base\dashboard.html:56
+#: .\base\templates\base\dashboard.html:42
+msgid "Current Hints"
+msgstr "Aktuelle Hinweise"
+
+#: .\base\templates\base\dashboard.html:55
 msgid "Weather Warnings"
 msgstr "Wetterwarnungen"
 
-#: .\base\templates\base\dashboard.html:60
+#: .\base\templates\base\dashboard.html:59
 msgid "Storm Map"
 msgstr "Unwetter-Karte"
 
-#: .\base\templates\base\dashboard.html:67
+#: .\base\templates\base\dashboard.html:66
 msgid "Pegel Wesenitz Elbersdorf"
 msgstr ""
 
-#: .\base\templates\base\dashboard.html:76
+#: .\base\templates\base\dashboard.html:75
 msgid "Pegel Elbe Schoena"
 msgstr ""
 
-#: .\base\templates\base\dashboard.html:85
+#: .\base\templates\base\dashboard.html:84
 msgid "Weather Forecast"
 msgstr "Wettervorhersage"
 
