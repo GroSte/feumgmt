@@ -38,6 +38,11 @@ class UserProfile(models.Model):
         verbose_name = _('User')
         verbose_name_plural = _('Users')
 
+        permissions = (
+            ("view_breathingprotectioncarrier", _('Can view breathing protection carriers')),
+            ("change_breathingprotectioncarrier", _('Can change breathing protection carrier')),
+        )
+
     def __unicode__(self):
         return '{0} {1}'.format(self.user.first_name, self.user.last_name)
 
@@ -129,6 +134,10 @@ class Training(models.Model):
         verbose_name = _('Training')
         verbose_name_plural = _('Trainings')
 
+        permissions = (
+            ("view_training", _('Can view trainings')),
+        )
+
     def __unicode__(self):
         return '{0} - {1}'.format(self.date, self.subject)
 
@@ -149,6 +158,10 @@ class BreathingProtectionTraining(models.Model):
     class Meta:
         verbose_name = _('Breathing Protection Training')
         verbose_name_plural = _('Breathing Protection Trainings')
+
+        permissions = (
+            ("view_breathingprotectiontraining", _('Can view breathing protection trainings')),
+        )
 
     def __unicode__(self):
         return '{0} - {1}'.format(self.date, self.location)
@@ -185,6 +198,10 @@ class Mission(models.Model):
         verbose_name = _('Mission')
         verbose_name_plural = _('Missions')
 
+        permissions = (
+            ("view_mission", _('Can view missions')),
+        )
+
     def __unicode__(self):
         return '{0}-{1}-{2} {3}'.format(self.keyword, self.volume, self.concerned, self.location)
 
@@ -204,6 +221,10 @@ class Message(models.Model):
     class Meta:
         verbose_name = _('Message')
         verbose_name_plural = _('Messages')
+
+        permissions = (
+            ("view_message", _('Can view messages')),
+        )
 
     def __unicode__(self):
         return '{0} ({1})'.format(self.subject, self.author)
