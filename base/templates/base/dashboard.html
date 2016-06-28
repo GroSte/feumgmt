@@ -31,8 +31,7 @@
                     {% trans 'Next Breathing Protection Training' %}:
                 </h4>
                 {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
-                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i><br />
-                <a href="{% url 'gallery' %}">{% trans 'Gallery' %}</a>
+                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 dash-tile-container">
@@ -46,8 +45,6 @@
                     {{ next_message.text }}<br />
                     <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br />
                 {% endfor %}
-                <br /><a href="{% url 'user_import' %}">User Import</a><br />
-                <a href="{% url 'training_import' %}">Training Import</a>
             </div>
         </div>
     </div>
