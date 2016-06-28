@@ -17,7 +17,7 @@ from os.path import isfile, join
 
 from base.forms import MissionForm, BPTrainingForm, MessageForm, BPCarrierForm
 from base.geo_locator import GeoLocator
-from base.importer import UserImporter
+from base.importer import UserImporter, TrainingImporter
 from base.models import Mission, Training, BreathingProtectionTraining, Message, UserProfile
 from feumgmt import settings
 
@@ -28,31 +28,29 @@ class Dashboard(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super(Dashboard, self).get_context_data(**kwargs)
 
-        first_training = Training.objects.all().order_by('date').first()
         try:
-            next_training = first_training.get_next_by_date()
+            next_training = Training.objects.filter(date__gt=timezone.now()).order_by(
+                'date').first()
+            responsibles = ', '.join([unicode(f) for f in next_training.responsibles.all()])
+            ctx['next_training'] = {
+                'date': next_training.date,
+                'subject': next_training.subject,
+                'responsibles': responsibles,
+            }
         except ObjectDoesNotExist:
-            next_training = first_training
+            ctx['next_training'] = None
 
-        responsibles = ', '.join([unicode(f) for f in next_training.responsibles.all()])
-        ctx['next_training'] = {
-            'date': next_training.date,
-            'subject': next_training.subject,
-            'responsibles': responsibles,
-        }
-
-        first_bp_training = BreathingProtectionTraining.objects.all().order_by('date').first()
         try:
-            next_bpt = first_bp_training.get_next_by_date()
+            next_bpt = BreathingProtectionTraining.objects.filter(
+                date__gt=timezone.now()).order_by('date').first()
+            participants = ', '.join([unicode(f) for f in next_bpt.participants.all()])
+            ctx['next_bpt'] = {
+                'date': next_bpt.date,
+                'location': next_bpt.location,
+                'participants': participants,
+            }
         except ObjectDoesNotExist:
-            next_bpt = first_bp_training
-
-        participants = ', '.join([unicode(f) for f in next_bpt.participants.all()])
-        ctx['next_bpt'] = {
-            'date': next_bpt.date,
-            'location': next_bpt.location,
-            'participants': participants,
-        }
+            ctx['next_bpt'] = None
 
         next_messages = Message.objects.all().order_by('-creation_date')[:3]
         if next_messages:
@@ -204,7 +202,24 @@ class UserImport(TemplateView):
     def post(self, request, *args, **kwargs):
         importer = UserImporter()
         users = importer.get_users_from_csv_file()
-        importer.import_users(users)
+        importer.import_users(users, self.request.user)
+        return HttpResponseRedirect(self.success_url)
+
+
+class TrainingImport(TemplateView):
+    template_name = 'base/training_import.html'
+    success_url = reverse_lazy('dashboard')
+
+    def get_context_data(self, **kwargs):
+        ctx = super(TrainingImport, self).get_context_data(**kwargs)
+        importer = TrainingImporter()
+        ctx['trainings'] = importer.get_trainings_from_csv_file()
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        importer = TrainingImporter()
+        trainings = importer.get_trainings_from_csv_file()
+        importer.import_trainings(trainings, self.request.user)
         return HttpResponseRedirect(self.success_url)
 
 

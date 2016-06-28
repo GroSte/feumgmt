@@ -1,0 +1,40 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {% trans 'Training Import' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{% trans 'Training Import' %}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Date' %}</th>
+                        <th>{% trans 'Subject' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for training in trainings %}
+                        <tr>
+                            <td>{{ training.date }}</td>
+                            <td>{{ training.subject }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+{% endblock %}
