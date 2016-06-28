@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^message/?$', views.MessageList.as_view(), name='message_list'),
     url(r'^message/new$', views.MessageCreate.as_view(), name='message_new'),
     url(r'^message/(?P<pk>\d+)?/?$', views.MessageUpdate.as_view(), name='message_edit'),
+    url(r'^user-import/$', views.UserImport.as_view(), name='user_import'),
     url(r'^gallery/?$', views.GalleryList.as_view(), name='gallery'),
 ]

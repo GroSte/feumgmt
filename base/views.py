@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import csv
 import os
 import time
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
@@ -178,6 +182,95 @@ class BPCarrierUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
         return super(BPCarrierUpdate, self).form_valid(form)
+
+
+class UserImport(TemplateView):
+    template_name = 'base/user_import.html'
+    success_url = reverse_lazy('dashboard')
+
+    def get_context_data(self, **kwargs):
+        ctx = super(UserImport, self).get_context_data(**kwargs)
+        ctx['users'] = self._get_users()
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        character_mapping = {
+            0xe4: u'ae',
+            ord(u'ö'): u'oe',
+            ord(u'ü'): u'ue',
+            ord(u'ß'): u'ss',
+        }
+
+        users = self._get_users()
+        for user in users:
+            first_name = unicode(user['first_name'], 'utf-8')
+            last_name = unicode(user['last_name'], 'utf-8')
+            username = '{0}.{1}'.format(first_name[:1], last_name)
+            username = username.lower()
+            username = username.translate(character_mapping)
+            try:
+                User.objects.get(username=username)
+                continue
+            except ObjectDoesNotExist:
+                pass
+
+            u = User.objects.create_user(username, user['email'], 'test')
+            u.first_name = first_name
+            u.last_name = last_name
+            u.save()
+
+            from datetime import datetime
+            birth_date = datetime.strptime(user['birth_date'], '%d.%m.%Y') if user['birth_date'] != '' else None
+            admittance_date = datetime.strptime(user['admittance_date'], '%d.%m.%Y') if user['admittance_date'] != '' else None
+            profile = UserProfile.objects.create(
+                user_id=u.id,
+                birth_date=birth_date,
+                admittance_date=admittance_date,
+                phone_number=user['phone_number'],
+                mobile_phone_number=user['mobile_phone_number'],
+            )
+            profile.save()
+
+        return HttpResponseRedirect(self.success_url)
+
+    def _get_users(self):
+        mapping = {
+            'last_name': 'Name',
+            'first_name': 'Vorname',
+            'birth_date': 'Geburt',
+            'admittance_date': 'Eintritt',
+            'phone_number': 'Tel.',
+            'mobile_phone_number': 'Handy',
+            'email': 'E-Mail',
+        }
+        current_mapping = {}
+        p = os.path.dirname(os.path.realpath(__file__))
+        path = os.path.abspath(
+            os.path.join(p, os.pardir))
+        path = os.path.join(path, 'user.csv')
+        is_first_row = True
+        rows = []
+        with open(path, 'rb') as csv_file:
+            reader = csv.reader(csv_file, delimiter=b';', quotechar=b'"')
+            for row in reader:
+                if is_first_row:
+                    res = dict((v, k) for k, v in mapping.iteritems())
+                    cnt = 1
+                    for r in row:
+                        if r in res:
+                            current_mapping[res[r]] = cnt
+                        cnt += 1
+                    is_first_row = False
+                    continue
+                rows.append(row)
+
+        d = []
+        for row in rows:
+            d2 = {}
+            for field, index in current_mapping.iteritems():
+                d2[field] = row[index - 1]
+            d.append(d2)
+        return d
 
 
 class GalleryList(TemplateView):

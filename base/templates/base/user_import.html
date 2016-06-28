@@ -1,0 +1,44 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {% trans 'User Import' %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{% trans 'User Import' %}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Last Name' %}</th>
+                        <th>{% trans 'First Name' %}</th>
+                        <th>{% trans 'Birth Date' %}</th>
+                        <th>{% trans 'Admittance Date' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.birth_date }}</td>
+                            <td>{{ user.admittance_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

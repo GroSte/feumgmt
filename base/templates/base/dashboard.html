@@ -44,6 +44,7 @@
                 {{ next_message.subject }}<br />
                 {{ next_message.text }}<br />
                 <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i>
+                <br /><a href="{% url 'user_import' %}">User Import</a>
             </div>
         </div>
     </div>
