@@ -41,9 +41,11 @@
                     <img src="{% static 'base/img/notepad.png' %}" class="icon" />
                     {% trans 'Current Hints' %}:
                 </h4>
-                {{ next_message.subject }}<br />
-                {{ next_message.text }}<br />
-                <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i>
+                {% for next_message in next_messages %}
+                    <b>{{ next_message.subject }}</b><br />
+                    {{ next_message.text }}<br />
+                    <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br />
+                {% endfor %}
                 <br /><a href="{% url 'user_import' %}">User Import</a>
             </div>
         </div>
