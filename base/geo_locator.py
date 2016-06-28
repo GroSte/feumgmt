@@ -74,8 +74,11 @@ class GeoLocator(object):
         return {}
 
     def _escape_address(self, address):
-        address = address.replace('ö', 'oe')
-        address = address.replace('ä', 'ae')
-        address = address.replace('ü', 'ue')
-        address = address.replace('ß', 'ss')
-        return address
+        character_mapping = {
+            0xe4: u'ae',
+            ord(u'ö'): u'oe',
+            ord(u'ü'): u'ue',
+            ord(u'ß'): u'ss',
+        }
+
+        return address.translate(character_mapping)
