@@ -37,6 +37,7 @@ class UserProfile(models.Model):
         db_table = 'user'
         verbose_name = _('User')
         verbose_name_plural = _('Users')
+        ordering = ('user__last_name',)
 
         permissions = (
             ("view_breathingprotectioncarrier", _('Can view breathing protection carriers')),
@@ -66,6 +67,7 @@ class Municipality(models.Model):
     class Meta:
         verbose_name = _('Municipality')
         verbose_name_plural = _('Municipalities')
+        ordering = ('name',)
 
     def __unicode__(self):
         return self.name
@@ -92,6 +94,7 @@ class FireHouse(models.Model):
     class Meta:
         verbose_name = _('Fire House')
         verbose_name_plural = _('Fire Houses')
+        ordering = ('name',)
 
     def __unicode__(self):
         return self.name
@@ -112,6 +115,7 @@ class Vehicle(models.Model):
     class Meta:
         verbose_name = _('Vehicle')
         verbose_name_plural = _('Vehicles')
+        ordering = ('call_sign',)
 
     def __unicode__(self):
         return self.call_sign
@@ -133,6 +137,7 @@ class Training(models.Model):
     class Meta:
         verbose_name = _('Training')
         verbose_name_plural = _('Trainings')
+        ordering = ('-date',)
 
         permissions = (
             ("view_training", _('Can view trainings')),
@@ -158,6 +163,7 @@ class BreathingProtectionTraining(models.Model):
     class Meta:
         verbose_name = _('Breathing Protection Training')
         verbose_name_plural = _('Breathing Protection Trainings')
+        ordering = ('-date',)
 
         permissions = (
             ("view_breathingprotectiontraining", _('Can view breathing protection trainings')),
@@ -197,6 +203,7 @@ class Mission(models.Model):
     class Meta:
         verbose_name = _('Mission')
         verbose_name_plural = _('Missions')
+        ordering = ('-alarm_time',)
 
         permissions = (
             ("view_mission", _('Can view missions')),
@@ -221,6 +228,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = _('Message')
         verbose_name_plural = _('Messages')
+        ordering = ('-creation_date',)
 
         permissions = (
             ("view_message", _('Can view messages')),
