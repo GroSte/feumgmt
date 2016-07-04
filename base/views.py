@@ -116,7 +116,7 @@ class BPTrainingCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('bptraining_list')
     form_class = BPTrainingForm
     template_name = 'base/bptraining_form.html'
-    permission_required = 'add_breathingprotectiontraining'
+    permission_required = 'base.add_breathingprotectiontraining'
 
     def form_valid(self, form):
         form.instance.organizer_id = self.request.user.id
@@ -130,7 +130,7 @@ class BPTrainingUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('bptraining_list')
     form_class = BPTrainingForm
     template_name = 'base/bptraining_form.html'
-    permission_required = 'change_breathingprotectiontraining'
+    permission_required = 'base.change_breathingprotectiontraining'
 
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
@@ -147,7 +147,7 @@ class MessageCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('message_list')
     form_class = MessageForm
     template_name = 'base/message_form.html'
-    permission_required = 'add_message'
+    permission_required = 'base.add_message'
 
     def form_valid(self, form):
         form.instance.author_id = self.request.user.id
@@ -161,7 +161,7 @@ class MessageUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('message_list')
     form_class = MessageForm
     template_name = 'base/message_form.html'
-    permission_required = 'change_message'
+    permission_required = 'base.change_message'
 
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
@@ -182,7 +182,7 @@ class BPCarrierUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('bpcarrier_list')
     form_class = BPCarrierForm
     template_name = 'base/bpcarrier_form.html'
-    permission_required = 'change_userprofile'
+    permission_required = 'base.change_breathingprotectioncarrier'
 
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
