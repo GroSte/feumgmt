@@ -13,6 +13,9 @@ body {
   font-family: ubuntu;
   margin-bottom: 20px; }
 
+.row {
+  margin: 0; }
+
 a {
   color: #FAA40E; }
 
@@ -69,11 +72,16 @@ h4 > .icon {
 
 /* Dashboard styles */
 .dash-tile-container {
-  padding: 8px; }
+  padding: 8px;
+  font-size: 110%; }
 
 .dash-tile {
-  padding: 0.7em;
+  padding: 0.5em;
   border: 1px dotted #888; }
+
+.dash-tile > h4 {
+  font-size: 120%;
+  padding: 0.1em 0; }
 
 .content h2 {
   padding: 0.3em 0; }
@@ -167,11 +175,15 @@ form {
   padding: 0.4em 0.2em; }
 
 .control-label {
-  width: 25%; }
+  width: 15%; }
 
 .controls {
   display: inline-block;
-  width: 70%; }
+  width: 80%; }
+
+form input[type="text"],
+form textarea {
+  width: 85%; }
 
 .leaflet-popup-content {
   color: #000; }
@@ -180,12 +192,26 @@ form {
   border-top: 1px solid #CCC; }
 
 /* Responsive styles */
+@media (min-width: 1200px) {
+  .control-label {
+    width: 10%; }
+
+  .controls {
+    width: 85%; }
+
+  form input[type="text"],
+  form textarea {
+    width: 70%; } }
+/* Responsive styles */
 @media (max-width: 768px) {
   .control-label {
     width: 100%; }
 
   .controls {
-    display: inline-block;
+    width: 100%; }
+
+  form input[type="text"],
+  form textarea {
     width: 100%; } }
 
 /*# sourceMappingURL=base.css.map */
