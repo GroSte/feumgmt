@@ -13,43 +13,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-4 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
-                    <img src="{% static 'base/img/presentation.png' %}" class="icon" />
-                    {% trans 'Next Training' %}:
-                </h4>
-                {{ next_training.date|date:"D, d.m.Y - H:i" }}<br />
-                {% trans 'Subject' %}: {{ next_training.subject }}<br />
-                <i>{% trans 'Responsibles' %}: {{ next_training.responsibles }}</i>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
-                    <img src="{% static 'base/img/fire-extinguisher.png' %}" class="icon" />
-                    {% trans 'Next Breathing Protection Training' %}:
-                </h4>
-                {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
-                <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
-                    <img src="{% static 'base/img/notepad.png' %}" class="icon" />
-                    {% trans 'Current Hints' %}:
-                </h4>
-                {% for next_message in next_messages %}
-                    <b>{{ next_message.subject }}</b><br />
-                    {{ next_message.text }}<br />
-                    <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br />
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-sm-12 dash-tile-container">
+        <div class="col-lg-5 col-md-12 dash-tile-container">
             <div class="dash-tile">
                 <h4>
                     <img src="{% static 'base/img/flash.png' %}" class="icon" />
@@ -60,35 +24,64 @@
                      alt="{% trans 'Storm Map' %}" />
             </div>
         </div>
-        <div class="col-md-4 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
-                    <img src="{% static 'base/img/presentation.png' %}" class="icon" />
-                    {% trans 'Pegel Wesenitz Elbersdorf' %}:
-                </h4>
-                <img src="http://www.umwelt.sachsen.de/umwelt/infosysteme/hwims/portal/diagramme/diagrammimage_550810_WEB_W" alt="" />
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
-                    <img src="{% static 'base/img/presentation.png' %}" class="icon" />
-                    {% trans 'Pegel Elbe Schoena' %}:
-                </h4>
-                <img src="http://www.umwelt.sachsen.de/umwelt/infosysteme/hwims/portal/diagramme/diagrammimage_501010_WEB_W" alt="" />
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-12 dash-tile-container">
-            <div class="dash-tile">
-                <h4>
-                    <img src="{% static 'base/img/cloud-and-sun.png' %}" class="icon" />
-                    {% trans 'Weather Forecast' %}:
-                </h4>
-                <div id="weatherWidget" data-serviceid="57656f3db66525.52521936" data-format="600x150" data-version="1.1" data-city="18232776" data-source="http://www.wetter24.de">
-                    <div serviceid="weatherWidgetBlock"></div>
-                    <script src="http://www.wetter24.de/fileadmin/scripts/widget.js"></script>
-                </div>
 
+        <div class="col-lg-7 col-md-12 dash-tile-container">
+            <div class="row">
+
+                <div class="col-md-6 col-xs-12 dash-tile-container">
+                    <div class="dash-tile">
+                        <h4>
+                            <img src="{% static 'base/img/presentation.png' %}" class="icon" />
+                            {% trans 'Next Training' %}:
+                        </h4>
+                        {{ next_training.date|date:"D, d.m.Y - H:i" }}<br />
+                        {% trans 'Subject' %}: {{ next_training.subject }}<br />
+                        <i>{% trans 'Responsibles' %}: {{ next_training.responsibles }}</i>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12 dash-tile-container">
+                    <div class="dash-tile">
+                        <h4>
+                            <img src="{% static 'base/img/fire-extinguisher.png' %}" class="icon" />
+                            {% trans 'Next Breathing Protection Training' %}:
+                        </h4>
+                        {{ next_bpt.date|date:"D, d.m.Y - H:i" }} {% trans 'in' %} {{ next_bpt.location }}<br />
+                        <i>{% trans 'Participants' %}: {{ next_bpt.participants }}</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-md-12 dash-tile-container">
+            <div class="row">
+
+                <div class="col-md-6 col-xs-12 dash-tile-container">
+                    <div class="dash-tile">
+                        <h4>
+                            <img src="{% static 'base/img/notepad.png' %}" class="icon" />
+                            {% trans 'Current Hints' %}:
+                        </h4>
+                        {% for next_message in next_messages %}
+                            <b>{{ next_message.subject }}</b><br />
+                            {{ next_message.text }}<br />
+                            <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br /><br />
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12 dash-tile-container">
+                    <div class="dash-tile">
+                        <h4>
+                            <img src="{% static 'base/img/cloud-and-sun.png' %}" class="icon" />
+                            {% trans 'Weather Forecast' %}:
+                        </h4>
+                        <div style="width:300px;height:250px;overflow:hidden;">
+                            <div style="position:relative;top:0px;left:0px;width:300px;height:221px;">
+                                <iframe src="//kachelmannwetter.com/widget/rectangle/6548692" width="300" height="221" scrolling="no" marginheight="0" frameborder="no"></iframe>
+                                <div style="position:absolute;top:221px;left:0px;width:300px;height:10px;background-color: #FFF">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
