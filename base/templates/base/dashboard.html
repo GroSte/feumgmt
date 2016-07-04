@@ -28,6 +28,21 @@
         <div class="col-lg-7 col-md-12 dash-tile-container">
             <div class="row">
 
+                {% if user.is_authenticated %}
+                    <div class="col-md-6 col-xs-12 dash-tile-container">
+                        <div class="dash-tile">
+                            <h4>
+                                <img src="{% static 'base/img/notepad.png' %}" class="icon" />
+                                {% trans 'Current Hints' %}:
+                            </h4>
+                            {% for next_message in next_messages %}
+                                <b>{{ next_message.subject }}</b><br />
+                                {{ next_message.text }}<br />
+                                <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br /><br />
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
                 <div class="col-md-6 col-xs-12 dash-tile-container">
                     <div class="dash-tile">
                         <h4>
@@ -55,19 +70,20 @@
         <div class="col-lg-7 col-md-12 dash-tile-container">
             <div class="row">
 
-                <div class="col-md-6 col-xs-12 dash-tile-container">
-                    <div class="dash-tile">
-                        <h4>
-                            <img src="{% static 'base/img/notepad.png' %}" class="icon" />
-                            {% trans 'Current Hints' %}:
-                        </h4>
-                        {% for next_message in next_messages %}
-                            <b>{{ next_message.subject }}</b><br />
-                            {{ next_message.text }}<br />
-                            <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br /><br />
-                        {% endfor %}
+                {% if user.is_authenticated %}
+                    <div class="col-md-6 col-xs-12 dash-tile-container">
+                        <div class="dash-tile">
+                            <h4>
+                                <img src="{% static 'base/img/notepad.png' %}" class="icon" />
+                                {% trans 'Next Birthdays' %}:
+                            </h4>
+                            {% for next_birthday in next_birthdays %}
+                                <b>{{ next_birthday.name }}</b>&nbsp;&nbsp;&nbsp;
+                                <i>{{ next_birthday.day }} ({{ next_birthday.age }} {% trans 'years' %})</i><br />
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
                 <div class="col-md-6 col-xs-12 dash-tile-container">
                     <div class="dash-tile">
                         <h4>

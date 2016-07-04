@@ -3,10 +3,13 @@ from __future__ import unicode_literals
 
 import os
 import time
+from datetime import date, datetime, timedelta
+import operator
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import ListView
@@ -52,11 +55,47 @@ class Dashboard(TemplateView):
         except ObjectDoesNotExist:
             ctx['next_bpt'] = None
 
+        ctx['next_birthdays'] = get_birth_days(31)
+
         next_messages = Message.objects.all().order_by('-creation_date')[:3]
         if next_messages:
             ctx['next_messages'] = next_messages
 
         return ctx
+
+
+def get_birth_days(days):
+    now = datetime.now()
+    then = now + timedelta(days)
+
+    # Build the list of month/day tuples.
+    monthdays = [(now.month, now.day)]
+    while now <= then:
+        monthdays.append((now.month, now.day))
+        now += timedelta(days=1)
+
+    # Tranform each into queryset keyword args.
+    monthdays = (dict(zip(("birth_date__month", "birth_date__day"), t))
+                 for t in monthdays)
+
+    # Compose the djano.db.models.Q objects together for a single query.
+    query = reduce(operator.or_, (Q(**d) for d in monthdays))
+
+    # Run the query.
+    users = UserProfile.objects.filter(query).order_by('birth_date')
+    listing = []
+    for user in users:
+        age = now.year - user.birth_date.year - ((now.month, now.day) < (user.birth_date.month, user.birth_date.day))
+        listing.append(
+            {
+                'index': user.birth_date.strftime('%m%d'),
+                'name': str(user),
+                'day': user.birth_date,
+                'age': age,
+            }
+        )
+    listing.sort(key=lambda s: s['index'])
+    return listing
 
 
 class MissionList(ListView):
