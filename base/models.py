@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from datetime import date, datetime, timedelta
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from djgeojson.fields import PointField
+import operator
 
 
 class UserProfile(models.Model):
@@ -46,6 +50,40 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return '{0} {1}'.format(self.user.first_name, self.user.last_name)
+
+    @staticmethod
+    def get_next_birthdays(days):
+        now = datetime.now()
+        then = now + timedelta(days)
+
+        monthdays = [(now.month, now.day)]
+        while now <= then:
+            monthdays.append((now.month, now.day))
+            now += timedelta(days=1)
+
+        monthdays = (dict(zip(("birth_date__month", "birth_date__day"), t))
+                     for t in monthdays)
+        query = reduce(operator.or_, (Q(**d) for d in monthdays))
+        users = UserProfile.objects.filter(query).order_by('birth_date')
+        listing = []
+        for user in users:
+            age = now.year - user.birth_date.year - (
+                (now.month, now.day) < (user.birth_date.month, user.birth_date.day))
+            if now.month == 12 and user.birth_date.strftime('%m') == '1':
+                # HACK to sort january after last december birthdays
+                index = '13' + user.birth_date.strftime('%d')
+            else:
+                index = user.birth_date.strftime('%m%d')
+            listing.append(
+                {
+                    'index': index,
+                    'name': str(user),
+                    'day': user.birth_date,
+                    'age': age,
+                }
+            )
+        listing.sort(key=lambda s: s['index'])
+        return listing
 
 
 class Municipality(models.Model):
