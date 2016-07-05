@@ -4,7 +4,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.layout import Layout, Submit
-from base.models import Mission, BreathingProtectionTraining, Message, UserProfile
+from base.models import Mission, BreathingProtectionTraining, Message, UserProfile, Training
 
 
 class MissionForm(forms.ModelForm):
@@ -46,6 +46,25 @@ class BPTrainingForm(forms.ModelForm):
         )
         self.fields['participants'].queryset = UserProfile.objects.filter(
             breathing_protection_carrier=True)
+
+
+class TrainingForm(forms.ModelForm):
+    class Meta:
+        model = Training
+        fields = ('date', 'subject', 'note', 'responsibles')
+
+        widgets = {
+            'responsibles': FilteredSelectMultiple(_('Responsibles'), is_stacked=False),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(TrainingForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'date', 'subject', 'note', 'responsibles',
+            Submit('submit', _(u'Save'), css_class='btn-success'),
+            Submit('cancel', _(u'Cancel'), css_class='btn-abort'),
+        )
 
 
 class BPCarrierForm(forms.ModelForm):

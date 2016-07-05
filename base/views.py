@@ -16,7 +16,7 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from geopy import Nominatim
 from os.path import isfile, join
 
-from base.forms import MissionForm, BPTrainingForm, MessageForm, BPCarrierForm
+from base.forms import MissionForm, BPTrainingForm, MessageForm, BPCarrierForm, TrainingForm
 from base.geo_locator import GeoLocator
 from base.importer import UserImporter, TrainingImporter
 from base.models import Mission, Training, BreathingProtectionTraining, Message, UserProfile
@@ -150,6 +150,51 @@ class BPTrainingDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
         ctx = super(BPTrainingDelete, self).get_context_data(**kwargs)
         ctx['object_primary_name'] = getattr(self.get_object(), 'date')
         ctx['object_secondary_name'] = getattr(self.get_object(), 'location')
+        ctx['object_class_name'] = force_text(self.model._meta.verbose_name)
+        return ctx
+
+
+class TrainingList(ListView):
+    model = Training
+    template_name = 'base/training_list.html'
+
+
+class TrainingCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Training
+    success_url = reverse_lazy('training_list')
+    form_class = TrainingForm
+    template_name = 'base/training_form.html'
+    permission_required = 'base.add_training'
+
+    def form_valid(self, form):
+        form.instance.organizer_id = self.request.user.id
+        form.instance.editor_id = self.request.user.id
+        form.instance.creation_date = timezone.now()
+        return super(TrainingCreate, self).form_valid(form)
+
+
+class TrainingUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Training
+    success_url = reverse_lazy('training_list')
+    form_class = TrainingForm
+    template_name = 'base/training_form.html'
+    permission_required = 'base.change_training'
+
+    def form_valid(self, form):
+        form.instance.editor_id = self.request.user.id
+        return super(TrainingUpdate, self).form_valid(form)
+
+
+class TrainingDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Training
+    success_url = reverse_lazy('training_list')
+    template_name = 'base/_confirm_delete.html'
+    permission_required = 'base.delete_training'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(TrainingDelete, self).get_context_data(**kwargs)
+        ctx['object_primary_name'] = getattr(self.get_object(), 'subject')
+        ctx['object_secondary_name'] = getattr(self.get_object(), 'date')
         ctx['object_class_name'] = force_text(self.model._meta.verbose_name)
         return ctx
 
