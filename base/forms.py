@@ -24,6 +24,8 @@ class MissionForm(forms.ModelForm):
         self.helper.layout = Layout(
             'number', 'alarm_time', 'keyword', 'description', 'volume', 'concerned', 'name',
             'street', 'location', 'signal', 'vehicles', 'firefighters',
+            Submit('submit', _(u'Save'), css_class='btn-success'),
+            Submit('cancel', _(u'Cancel'), css_class='btn-abort'),
         )
 
 

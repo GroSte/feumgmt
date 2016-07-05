@@ -13,7 +13,6 @@ from django.utils.encoding import force_text
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from geopy import Nominatim
 from os.path import isfile, join
 
 from base.forms import MissionForm, BPTrainingForm, MessageForm, BPCarrierForm, TrainingForm
@@ -66,6 +65,20 @@ class MissionList(ListView):
     model = Mission
 
 
+class MissionCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Mission
+    success_url = reverse_lazy('mission_list')
+    form_class = MissionForm
+    template_name = 'base/mission_form.html'
+    permission_required = 'base.add_mission'
+
+    def form_valid(self, form):
+        form.instance.organizer_id = self.request.user.id
+        form.instance.editor_id = self.request.user.id
+        form.instance.creation_date = timezone.now()
+        return super(MissionCreate, self).form_valid(form)
+
+
 class MissionUpdate(UpdateView):
     model = Mission
     success_url = reverse_lazy('mission_list')
@@ -75,17 +88,26 @@ class MissionUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         ctx = super(MissionUpdate, self).get_context_data(**kwargs)
 
-        geolocator = Nominatim(format_string="%s, Landkreis Sächsische Schweiz-Osterzgebirge, Sachsen, 01833, Deutschland")
+        geo_locator = GeoLocator()
+        key = settings.MAP_QUEST_KEY
         address = '{0}, {1}'.format(self.object.street, self.object.location)
 
-        # 11, Alte Hauptstraße, Wilschdorf, Dürrröhrsdorf-Dittersbach, Landkreis Sächsische Schweiz-Osterzgebirge, Sachsen, 01833, Deutschland
-        locations = geolocator.geocode(address, False)
-        if locations:
-            location = locations[0]
-            ctx['address'] = location.address
-            ctx['lat'] = float(location.latitude)
-            ctx['long'] = float(location.longitude)
-            ctx['raw'] = location.raw
+        ctx.update(geo_locator.get_location_coordinates(key, address))
+        ctx.update(geo_locator.get_route(key, address))
+        return ctx
+
+
+class MissionDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Mission
+    success_url = reverse_lazy('mission_list')
+    template_name = 'base/_confirm_delete.html'
+    permission_required = 'base.delete_mission'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(MissionDelete, self).get_context_data(**kwargs)
+        ctx['object_primary_name'] = getattr(self.get_object(), 'description')
+        ctx['object_secondary_name'] = getattr(self.get_object(), 'alarm_time')
+        ctx['object_class_name'] = force_text(self.model._meta.verbose_name)
         return ctx
 
 
@@ -95,12 +117,10 @@ class MissionAlarm(TemplateView):
 
     def get_context_data(self, **kwargs):
         ctx = super(MissionAlarm, self).get_context_data(**kwargs)
-
-        mission = Mission.objects.all().order_by('-alarm_time').first()
+        mission = Mission.objects.get(pk=self.kwargs.get('pk'))
         ctx['object'] = mission
 
         geo_locator = GeoLocator()
-
         key = settings.MAP_QUEST_KEY
         address = '{0}, {1}'.format(mission.street, mission.location)
 

@@ -9,16 +9,30 @@
             <h2>{% trans 'Missions' %}</h2>
         </div>
     </div>
+
+    {% if perms.base.add_mission %}
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="{% url 'mission_new' %}">
+                    <button type="button" class="btn btn-success btn-large">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        {% trans 'Create mission' %}
+                    </button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>{% trans 'Number' %}</th>
                         <th>{% trans 'Alarm Time' %}</th>
                         <th>{% trans 'Keyword' %}</th>
                         <th>{% trans 'Location' %}</th>
                         <th>{% trans 'Street' %}</th>
+                        <th>{% trans 'Actions' %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,15 +40,31 @@
                         <tr>
                             <td>
                                 {% if perms.base.change_mission %}
-                                    <a href="{% url 'mission_edit' item.id %}">{{ item.number }}</a>
+                                    <a href="{% url 'mission_edit' item.id %}">{{ item.alarm_time }}</a>
                                 {% else %}
-                                    {{ item.number }}
+                                    {{ item.alarm_time }}
                                 {% endif %}
                             </td>
-                            <td>{{ item.alarm_time }}</td>
                             <td>{{ item.keyword }} - {{ item.volume }}</td>
                             <td>{{ item.location }}</td>
                             <td>{{ item.street }}</td>
+                            <td>
+                                <a href="{% url 'mission_alarm' item.id %}" title="{% trans 'Show alarm view' %}">
+                                    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                </a>
+
+                                {% if perms.base.change_mission %}
+                                    <a href="{% url 'mission_edit' item.id %}" title="{% trans 'Open' %}">
+                                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if perms.base.delete_mission %}
+                                    <a href="{% url 'mission_delete' item.id %}" title="{% trans 'Delete' %}">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

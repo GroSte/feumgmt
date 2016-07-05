@@ -9,8 +9,10 @@ urlpatterns = [
 
     url(r'^dashboard/$', views.Dashboard.as_view(), name='dashboard'),
     url(r'^missions/?$', views.MissionList.as_view(), name='mission_list'),
+    url(r'^mission/new$', views.MissionCreate.as_view(), name='mission_new'),
     url(r'^mission/(?P<pk>\d+)?/?$', views.MissionUpdate.as_view(), name='mission_edit'),
-    url(r'^mission-alarm/?$', views.MissionAlarm.as_view(), name='mission_alarm'),
+    url(r'^mission/delete/(?P<pk>\d+)?/?$', views.MissionDelete.as_view(), name='mission_delete'),
+    url(r'^mission-alarm/(?P<pk>\d+)?/?$', views.MissionAlarm.as_view(), name='mission_alarm'),
     url(r'^bp-trainings/?$', views.BPTrainingList.as_view(), name='bptraining_list'),
     url(r'^bp-training/new$', views.BPTrainingCreate.as_view(), name='bptraining_new'),
     url(r'^bp-training/(?P<pk>\d+)?/?$', views.BPTrainingUpdate.as_view(), name='bptraining_edit'),
