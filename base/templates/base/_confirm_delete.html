@@ -1,0 +1,25 @@
+{% extends "base/__base.html" %}
+{% load staticfiles i18n %}
+
+{% block title %}{{ block.super }} | {{ object_class_name }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>
+        {% blocktrans with cls=object_class_name name=object_primary_name %}Delete {{ cls }}: {{ name }}{% endblocktrans %}
+        <small>({{ object_secondary_name }})</small></h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form method="post">
+                {% csrf_token %}
+                {% blocktrans with name=object_primary_name %}Are you sure you want to delete '{{ name }}'?{% endblocktrans %}
+                <br /><br />
+                <button type="submit" class="btn btn-success">{% trans 'Delete' %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

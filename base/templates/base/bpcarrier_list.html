@@ -18,6 +18,7 @@
                         <th>{% trans 'Name' %}</th>
                         <th>{% trans 'Next Medical Examination Date' %}</th>
                         <th>{% trans 'Next Breathing Protection Training Date' %}</th>
+                        <th>{% trans 'Actions' %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,13 @@
                             </td>
                             <td>{{ item.next_medical_examination_date|date:"d.m.Y" }}</td>
                             <td>{{ item.next_breathing_protection_training_date|date:"d.m.Y" }}</td>
+                            <td>
+                                {% if perms.base.change_breathingprotectioncarrier %}
+                                    <a href="{% url 'bpcarrier_edit' item.id %}" title="{% trans 'Open' %}">
+                                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

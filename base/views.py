@@ -3,18 +3,16 @@ from __future__ import unicode_literals
 
 import os
 import time
-from datetime import date, datetime, timedelta
-import operator
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
-from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.utils import timezone
+from django.utils.encoding import force_text
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import UpdateView, CreateView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from geopy import Nominatim
 from os.path import isfile, join
 
@@ -55,47 +53,13 @@ class Dashboard(TemplateView):
         except ObjectDoesNotExist:
             ctx['next_bpt'] = None
 
-        ctx['next_birthdays'] = get_birth_days(31)
+        ctx['next_birthdays'] = UserProfile.get_next_birthdays(31)
 
         next_messages = Message.objects.all().order_by('-creation_date')[:3]
         if next_messages:
             ctx['next_messages'] = next_messages
 
         return ctx
-
-
-def get_birth_days(days):
-    now = datetime.now()
-    then = now + timedelta(days)
-
-    # Build the list of month/day tuples.
-    monthdays = [(now.month, now.day)]
-    while now <= then:
-        monthdays.append((now.month, now.day))
-        now += timedelta(days=1)
-
-    # Tranform each into queryset keyword args.
-    monthdays = (dict(zip(("birth_date__month", "birth_date__day"), t))
-                 for t in monthdays)
-
-    # Compose the djano.db.models.Q objects together for a single query.
-    query = reduce(operator.or_, (Q(**d) for d in monthdays))
-
-    # Run the query.
-    users = UserProfile.objects.filter(query).order_by('birth_date')
-    listing = []
-    for user in users:
-        age = now.year - user.birth_date.year - ((now.month, now.day) < (user.birth_date.month, user.birth_date.day))
-        listing.append(
-            {
-                'index': user.birth_date.strftime('%m%d'),
-                'name': str(user),
-                'day': user.birth_date,
-                'age': age,
-            }
-        )
-    listing.sort(key=lambda s: s['index'])
-    return listing
 
 
 class MissionList(ListView):
@@ -176,6 +140,20 @@ class BPTrainingUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return super(BPTrainingUpdate, self).form_valid(form)
 
 
+class BPTrainingDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = BreathingProtectionTraining
+    success_url = reverse_lazy('bptraining_list')
+    template_name = 'base/_confirm_delete.html'
+    permission_required = 'base.delete_breathingprotectiontraining'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(BPTrainingDelete, self).get_context_data(**kwargs)
+        ctx['object_primary_name'] = getattr(self.get_object(), 'date')
+        ctx['object_secondary_name'] = getattr(self.get_object(), 'location')
+        ctx['object_class_name'] = force_text(self.model._meta.verbose_name)
+        return ctx
+
+
 class MessageList(ListView):
     model = Message
     template_name = 'base/message_list.html'
@@ -205,6 +183,20 @@ class MessageUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
         return super(MessageUpdate, self).form_valid(form)
+
+
+class MessageDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Message
+    success_url = reverse_lazy('message_list')
+    template_name = 'base/_confirm_delete.html'
+    permission_required = 'base.delete_message'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(MessageDelete, self).get_context_data(**kwargs)
+        ctx['object_primary_name'] = getattr(self.get_object(), 'subject')
+        ctx['object_secondary_name'] = getattr(self.get_object(), 'creation_date')
+        ctx['object_class_name'] = force_text(self.model._meta.verbose_name)
+        return ctx
 
 
 class BPCarrierList(ListView):
@@ -257,8 +249,7 @@ class TrainingImport(TemplateView):
 
     def post(self, request, *args, **kwargs):
         importer = TrainingImporter()
-        trainings = importer.get_trainings_from_csv_file()
-        importer.import_trainings(trainings, self.request.user)
+        importer.import_trainings(self.request.user)
         return HttpResponseRedirect(self.success_url)
 
 

@@ -84,9 +84,12 @@ class UserImporter(Importer):
             u.last_name = last_name
             u.save()
 
-            from datetime import datetime
-            birth_date = datetime.strptime(user['birth_date'], '%d.%m.%Y') if user['birth_date'] != '' else None
-            admittance_date = datetime.strptime(user['admittance_date'], '%d.%m.%Y') if user['admittance_date'] != '' else None
+            birth_date = None
+            admittance_date = None
+            if user['birth_date'] != '':
+                birth_date = datetime.strptime(user['birth_date'], '%d.%m.%Y')
+            if user['admittance_date'] != '':
+                admittance_date = datetime.strptime(user['admittance_date'], '%d.%m.%Y')
             profile = UserProfile.objects.create(
                 user_id=u.id,
                 birth_date=birth_date,
@@ -108,7 +111,7 @@ class TrainingImporter(Importer):
         'note': 'SONSTIGES',
     }
 
-    def get_trainings_from_csv_file(self, file_name='mission.csv'):
+    def get_trainings_from_csv_file(self, file_name='training.csv'):
         current_mapping = {}
         base_path = os.path.dirname(os.path.realpath(__file__))
         path = os.path.abspath(os.path.join(base_path, os.pardir))
@@ -160,7 +163,8 @@ class TrainingImporter(Importer):
                 pass
         return responsibles
 
-    def import_trainings(self, trainings, editor):
+    def import_trainings(self, editor, trainings=None):
+        trainings = trainings if trainings else self.get_trainings_from_csv_file()
         for training in trainings:
             try:
                 Training.objects.get(date=training['date'])

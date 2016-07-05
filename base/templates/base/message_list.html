@@ -31,6 +31,7 @@
                         <th>{% trans 'Subject' %}</th>
                         <th>{% trans 'Author' %}</th>
                         <th>{% trans 'Creation Date' %}</th>
+                        <th>{% trans 'Actions' %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,19 @@
                                 {% endif %}
                             <td>{{ item.author }}</td>
                             <td>{{ item.creation_date|date:"d.m.Y" }}</td>
+                            <td>
+                                {% if perms.base.change_message %}
+                                    <a href="{% url 'message_edit' item.id %}" title="{% trans 'Open' %}">
+                                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if perms.base.delete_message %}
+                                    <a href="{% url 'message_delete' item.id %}" title="{% trans 'Delete' %}">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

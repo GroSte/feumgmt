@@ -31,6 +31,7 @@
                         <th>{% trans 'Date' %}</th>
                         <th>{% trans 'Location' %}</th>
                         <th>{% trans 'Participants' %}</th>
+                        <th>{% trans 'Actions' %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,19 @@
                             </td>
                             <td>{{ item.location }}</td>
                             <td>{{ item.participants.all|join:', ' }}</td>
+                            <td>
+                                {% if perms.base.change_breathingprotectiontraining %}
+                                    <a href="{% url 'bptraining_edit' item.id %}" title="{% trans 'Open' %}">
+                                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+
+                                {% if perms.base.delete_breathingprotectiontraining %}
+                                    <a href="{% url 'bptraining_delete' item.id %}" title="{% trans 'Delete' %}">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
