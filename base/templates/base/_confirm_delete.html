@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <form method="post">
                 {% csrf_token %}
-                {% blocktrans with name=object_primary_name %}Are you sure you want to delete '{{ name }}'?{% endblocktrans %}
+                {% blocktrans with name=object_primary_name %}Are you sure you want to delete '{{ name }}'{% endblocktrans %}?
                 <br /><br />
                 <button type="submit" class="btn btn-success">{% trans 'Delete' %}</button>
             </form>
