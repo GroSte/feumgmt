@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-05 09:23+0200\n"
-"PO-Revision-Date: 2016-07-05 09:24+0100\n"
+"POT-Creation-Date: 2016-07-07 14:46+0200\n"
+"PO-Revision-Date: 2016-07-07 14:47+0100\n"
 "Last-Translator: Steve Gröber <steve.groeber@shd-online.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,33 +18,33 @@ msgstr ""
 "Language: de\n"
 "X-Generator: Poedit 1.8.1\n"
 
-#: .\base\forms.py:17 .\base\models.py:155 .\base\models.py:231
+#: .\base\forms.py:17 .\base\forms.py:39 .\base\forms.py:58 .\base\forms.py:79
+#: .\base\forms.py:95 .\base\forms.py:117
+msgid "Save"
+msgstr "Speichern"
+
+#: .\base\forms.py:18 .\base\forms.py:40 .\base\forms.py:59 .\base\forms.py:80
+#: .\base\forms.py:96 .\base\forms.py:118
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: .\base\forms.py:29 .\base\models.py:155 .\base\models.py:231
 #: .\base\templates\base\mission_alarm.html:53
 msgid "Vehicles"
 msgstr "Fahrzeuge"
 
-#: .\base\forms.py:18 .\base\models.py:234
+#: .\base\forms.py:30 .\base\models.py:234
 msgid "Firefighters"
 msgstr "Feuerwehrmänner"
 
-#: .\base\forms.py:27 .\base\forms.py:46 .\base\forms.py:67 .\base\forms.py:83
-#: .\base\forms.py:105
-msgid "Save"
-msgstr "Speichern"
-
-#: .\base\forms.py:28 .\base\forms.py:47 .\base\forms.py:68 .\base\forms.py:84
-#: .\base\forms.py:106
-msgid "Cancel"
-msgstr "Abbrechen"
-
-#: .\base\forms.py:38 .\base\models.py:195
+#: .\base\forms.py:50 .\base\models.py:195
 #: .\base\templates\base\bptraining_list.html:33
-#: .\base\templates\base\dashboard.html:64
+#: .\base\templates\base\dashboard.html:67
 msgid "Participants"
 msgstr "Teilnehmer"
 
-#: .\base\forms.py:59 .\base\models.py:168
-#: .\base\templates\base\dashboard.html:54
+#: .\base\forms.py:71 .\base\models.py:168
+#: .\base\templates\base\dashboard.html:57
 #: .\base\templates\base\training_list.html:33
 msgid "Responsibles"
 msgstr "Verantwortliche"
@@ -139,13 +139,13 @@ msgid "Chief"
 msgstr "Wehrleiter"
 
 #: .\base\models.py:94 .\base\models.py:119 .\base\models.py:227
-#: .\base\templates\base\mission_list.html:35
+#: .\base\templates\base\mission_list.html:34
 msgid "Street"
 msgstr "Straße"
 
 #: .\base\models.py:96 .\base\models.py:121 .\base\models.py:190
 #: .\base\models.py:228 .\base\templates\base\bptraining_list.html:32
-#: .\base\templates\base\mission_list.html:34
+#: .\base\templates\base\mission_list.html:33
 msgid "Location"
 msgstr "Ort"
 
@@ -195,7 +195,7 @@ msgid "Date"
 msgstr "Datum"
 
 #: .\base\models.py:164 .\base\models.py:255
-#: .\base\templates\base\dashboard.html:53
+#: .\base\templates\base\dashboard.html:56
 #: .\base\templates\base\message_list.html:31
 #: .\base\templates\base\training_import.html:18
 #: .\base\templates\base\training_list.html:32
@@ -238,15 +238,15 @@ msgstr "Atemschutzausbildungen"
 msgid "Can view breathing protection trainings"
 msgstr "Kann Atemschutzausbildungen sehen"
 
-#: .\base\models.py:216 .\base\templates\base\mission_list.html:31
+#: .\base\models.py:216
 msgid "Number"
 msgstr "Nummer"
 
-#: .\base\models.py:217 .\base\templates\base\mission_list.html:32
+#: .\base\models.py:217 .\base\templates\base\mission_list.html:31
 msgid "Alarm Time"
 msgstr "Alarmzeit"
 
-#: .\base\models.py:218 .\base\templates\base\mission_list.html:33
+#: .\base\models.py:218 .\base\templates\base\mission_list.html:32
 msgid "Keyword"
 msgstr "Stichwort"
 
@@ -317,6 +317,7 @@ msgid "FiT"
 msgstr "FiT"
 
 #: .\base\templates\base\__base.html:31 .\base\templates\base\__base.html:54
+#: .\base\templates\base\dashboard.html:4
 msgid "Home"
 msgstr "Startseite"
 
@@ -327,8 +328,8 @@ msgid "Breathing Protection Carriers"
 msgstr "Atemschutzgeräteträger"
 
 #: .\base\templates\base\__base.html:86
-msgid "Edit user profile"
-msgstr "Nutzerprofil bearbeiten"
+msgid "Edit user"
+msgstr "Benutzer bearbeiten"
 
 #: .\base\templates\base\__base.html:89
 msgid "Logout"
@@ -356,10 +357,6 @@ msgstr "Benutzerimport"
 msgid "Training Import"
 msgstr "Ausbildungsimport"
 
-#: .\base\templates\base\__base.html:119
-msgid "Mission-Alarm"
-msgstr "Einsatzalarm"
-
 #: .\base\templates\base\_confirm_delete.html:10
 #, python-format
 msgid "Delete %(cls)s: %(name)s"
@@ -373,7 +370,7 @@ msgstr "Sind Sie sicher, dass Sie '%(name)s' löschen wollen"
 #: .\base\templates\base\_confirm_delete.html:21
 #: .\base\templates\base\bptraining_list.html:57
 #: .\base\templates\base\message_list.html:56
-#: .\base\templates\base\mission_list.html:61
+#: .\base\templates\base\mission_list.html:63
 #: .\base\templates\base\training_list.html:57
 msgid "Delete"
 msgstr "Löschen"
@@ -385,7 +382,7 @@ msgstr "Bearbeite"
 #: .\base\templates\base\bpcarrier_list.html:21
 #: .\base\templates\base\bptraining_list.html:34
 #: .\base\templates\base\message_list.html:34
-#: .\base\templates\base\mission_list.html:36
+#: .\base\templates\base\mission_list.html:35
 #: .\base\templates\base\training_list.html:34
 msgid "Actions"
 msgstr "Aktionen"
@@ -393,7 +390,7 @@ msgstr "Aktionen"
 #: .\base\templates\base\bpcarrier_list.html:40
 #: .\base\templates\base\bptraining_list.html:51
 #: .\base\templates\base\message_list.html:50
-#: .\base\templates\base\mission_list.html:55
+#: .\base\templates\base\mission_list.html:57
 #: .\base\templates\base\training_list.html:51
 msgid "Open"
 msgstr "Öffnen"
@@ -401,10 +398,6 @@ msgstr "Öffnen"
 #: .\base\templates\base\bptraining_list.html:19
 msgid "Create breathing protection training"
 msgstr "Atemschutzausbildung erstellen"
-
-#: .\base\templates\base\dashboard.html:4
-msgid "Dashboard"
-msgstr "Anschlagtafel"
 
 #: .\base\templates\base\dashboard.html:20
 msgid "Weather Warnings"
@@ -418,27 +411,27 @@ msgstr "Unwetter-Karte"
 msgid "Current Hints"
 msgstr "Aktuelle Hinweise"
 
-#: .\base\templates\base\dashboard.html:50
+#: .\base\templates\base\dashboard.html:53
 msgid "Next Training"
 msgstr "Nächster Dienst"
 
-#: .\base\templates\base\dashboard.html:61
+#: .\base\templates\base\dashboard.html:64
 msgid "Next Breathing Protection Training"
 msgstr "Nächste Atemschutzausbildung"
 
-#: .\base\templates\base\dashboard.html:63
+#: .\base\templates\base\dashboard.html:66
 msgid "in"
 msgstr "in"
 
-#: .\base\templates\base\dashboard.html:78
+#: .\base\templates\base\dashboard.html:81
 msgid "Next Birthdays"
 msgstr "Nächste Geburtstage"
 
-#: .\base\templates\base\dashboard.html:82
+#: .\base\templates\base\dashboard.html:85
 msgid "years"
 msgstr "Jahre"
 
-#: .\base\templates\base\dashboard.html:91
+#: .\base\templates\base\dashboard.html:94
 msgid "Weather Forecast"
 msgstr "Wettervorhersage"
 
@@ -486,9 +479,22 @@ msgstr "Zeit"
 msgid "Create mission"
 msgstr "Einsatz erstellen"
 
+#: .\base\templates\base\mission_list.html:52
+msgid "Show alarm view"
+msgstr "Zeige Alarm-Ansicht"
+
 #: .\base\templates\base\training_list.html:19
 msgid "Create training"
 msgstr "Ausbildung erstellen"
+
+#: .\base\templates\base\user_change_password.html:4
+#: .\base\templates\base\user_change_password.html:16
+msgid "Change user password"
+msgstr "Benutzer-Kennwort ändern"
+
+#: .\base\templates\base\user_change_password.html:22
+msgid "Enter a new password for user"
+msgstr "Gib ein neues Passwort ein für Benutzer"
 
 #: .\base\templates\base\user_import.html:17
 msgid "Last Name"
@@ -497,6 +503,12 @@ msgstr "Nachname"
 #: .\base\templates\base\user_import.html:18
 msgid "First Name"
 msgstr "Vorname"
+
+#~ msgid "Mission-Alarm"
+#~ msgstr "Einsatzalarm"
+
+#~ msgid "Dashboard"
+#~ msgstr "Anschlagtafel"
 
 #~ msgid "F-I-T"
 #~ msgstr "F-I-T"
