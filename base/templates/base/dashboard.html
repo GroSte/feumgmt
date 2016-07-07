@@ -1,7 +1,7 @@
 {% extends "base/__base.html" %}
 {% load staticfiles i18n %}
 
-{% block title %}{{ block.super }} | {% trans 'Dashboard' %}{% endblock %}
+{% block title %}{{ block.super }} | {% trans 'Home' %}{% endblock %}
 
 {% block css-scripts %}
     <style type="text/css">
@@ -38,7 +38,10 @@
                             {% for next_message in next_messages %}
                                 <b>{{ next_message.subject }}</b><br />
                                 {{ next_message.text }}<br />
-                                <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i><br /><br />
+                                <i>({{ next_message.creation_date|date:"d.m.Y" }} - {{ next_message.author }})</i>
+                                {% if not forloop.last %}
+                                    <br /><br />
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
