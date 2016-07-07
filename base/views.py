@@ -52,7 +52,7 @@ class Dashboard(TemplateView):
         except ObjectDoesNotExist:
             ctx['next_bpt'] = None
 
-        ctx['next_birthdays'] = UserProfile.get_next_birthdays(31)
+        ctx['next_birthdays'] = UserProfile.get_next_birthdays()
 
         next_messages = Message.objects.all().order_by('-creation_date')[:3]
         if next_messages:

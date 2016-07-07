@@ -52,7 +52,7 @@ class UserProfile(models.Model):
         return '{0} {1}'.format(self.user.first_name, self.user.last_name)
 
     @staticmethod
-    def get_next_birthdays(days):
+    def get_next_birthdays(days=31):
         now = datetime.now()
         then = now + timedelta(days)
 
