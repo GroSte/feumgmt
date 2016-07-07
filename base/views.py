@@ -12,10 +12,11 @@ from django.utils import timezone
 from django.utils.encoding import force_text
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView, FormView
 from os.path import isfile, join
 
-from base.forms import MissionForm, BPTrainingForm, MessageForm, BPCarrierForm, TrainingForm
+from base.forms import MissionForm, BPTrainingForm, MessageForm, BPCarrierForm, TrainingForm, \
+    UserPasswordChangeForm
 from base.geo_locator import GeoLocator
 from base.importer import UserImporter, TrainingImporter
 from base.models import Mission, Training, BreathingProtectionTraining, Message, UserProfile
@@ -59,6 +60,21 @@ class Dashboard(TemplateView):
             ctx['next_messages'] = next_messages
 
         return ctx
+
+
+class UserChangePassword(LoginRequiredMixin, FormView):
+    success_url = reverse_lazy('logout')
+    form_class = UserPasswordChangeForm
+    template_name = 'base/user_change_password.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(UserChangePassword, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        return super(UserChangePassword, self).form_valid(form)
 
 
 class MissionList(ListView):

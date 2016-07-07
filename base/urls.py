@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^logout/$', logout_then_login, {'login_url': reverse_lazy('login')}, name='logout'),
 
     url(r'^dashboard/$', views.Dashboard.as_view(), name='dashboard'),
+    url(r'^user/password/?$', views.UserChangePassword.as_view(), name='user_change_password'),
     url(r'^missions/?$', views.MissionList.as_view(), name='mission_list'),
     url(r'^mission/new$', views.MissionCreate.as_view(), name='mission_new'),
     url(r'^mission/(?P<pk>\d+)?/?$', views.MissionUpdate.as_view(), name='mission_edit'),

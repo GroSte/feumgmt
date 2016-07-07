@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-sm-1 col-xs-2 text-right icon-bar">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}" title="{% trans 'Edit user profile' %}">
+                        <a href="{% url 'user_change_password' %}" title="{% trans 'Edit user' %}">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
                         <a href="{% url 'logout' %}" title="{% trans 'Logout' %}">
