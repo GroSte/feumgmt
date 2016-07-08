@@ -44,7 +44,7 @@ class UserImporter(Importer):
         'email': 'E-Mail',
     }
 
-    def get_users_from_csv_file(self, file_name='user.csv'):
+    def get_users_from_csv_file(self, file_name='config/user.csv'):
         current_mapping = {}
         base_path = os.path.dirname(os.path.realpath(__file__))
         path = os.path.abspath(os.path.join(base_path, os.pardir))
@@ -111,7 +111,7 @@ class TrainingImporter(Importer):
         'note': 'SONSTIGES',
     }
 
-    def get_trainings_from_csv_file(self, file_name='training.csv'):
+    def get_trainings_from_csv_file(self, file_name='config/training.csv'):
         current_mapping = {}
         base_path = os.path.dirname(os.path.realpath(__file__))
         path = os.path.abspath(os.path.join(base_path, os.pardir))
