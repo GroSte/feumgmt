@@ -13,10 +13,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name='breathingprotectiontraining',
-            options={'ordering': ('-date',), 'permissions': (('view_breathingprotectiontraining', 'Can view breathing protection trainings'),), 'verbose_name': 'Breathing Protection Training', 'verbose_name_plural': 'Breathing Protection Trainings'},
-        ),
-        migrations.AlterModelOptions(
             name='firehouse',
             options={'ordering': ('name',), 'verbose_name': 'Fire House', 'verbose_name_plural': 'Fire Houses'},
         ),
@@ -25,16 +21,8 @@ class Migration(migrations.Migration):
             options={'ordering': ('-creation_date',), 'permissions': (('view_message', 'Can view messages'),), 'verbose_name': 'Message', 'verbose_name_plural': 'Messages'},
         ),
         migrations.AlterModelOptions(
-            name='mission',
-            options={'ordering': ('-alarm_time',), 'permissions': (('view_mission', 'Can view missions'),), 'verbose_name': 'Mission', 'verbose_name_plural': 'Missions'},
-        ),
-        migrations.AlterModelOptions(
             name='municipality',
             options={'ordering': ('name',), 'verbose_name': 'Municipality', 'verbose_name_plural': 'Municipalities'},
-        ),
-        migrations.AlterModelOptions(
-            name='training',
-            options={'ordering': ('-date',), 'permissions': (('view_training', 'Can view trainings'),), 'verbose_name': 'Training', 'verbose_name_plural': 'Trainings'},
         ),
         migrations.AlterModelOptions(
             name='userprofile',

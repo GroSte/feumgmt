@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import djgeojson.fields
 
 
 class Migration(migrations.Migration):
@@ -17,21 +16,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='BreathingProtectionTraining',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(max_length=100, verbose_name='Date')),
-                ('location', models.CharField(blank=True, max_length=20, null=True, verbose_name='Location')),
-                ('creation_date', models.DateTimeField(blank=True, null=True, verbose_name='Creation date')),
-                ('last_update', models.DateTimeField(auto_now=True, null=True, verbose_name='Last update')),
-            ],
-            options={
-                'verbose_name': 'Breathing Protection Training',
-                'verbose_name_plural': 'Breathing Protection Trainings',
-                'permissions': (('view_breathingprotectiontraining', 'Can view breathing protection trainings'),),
-            },
-        ),
         migrations.CreateModel(
             name='FireHouse',
             fields=[
@@ -66,30 +50,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Mission',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('number', models.CharField(blank=True, max_length=20, null=True, verbose_name='Number')),
-                ('alarm_time', models.DateTimeField(verbose_name='Alarm Time')),
-                ('keyword', models.CharField(db_index=True, max_length=100, verbose_name='Keyword')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Description')),
-                ('volume', models.CharField(blank=True, max_length=100, null=True, verbose_name='Volume')),
-                ('concerned', models.CharField(blank=True, max_length=20, null=True, verbose_name='Concerned')),
-                ('name', models.CharField(blank=True, max_length=200, null=True, verbose_name='Name')),
-                ('street', models.CharField(max_length=200, verbose_name='Street')),
-                ('location', models.CharField(max_length=200, verbose_name='Location')),
-                ('coordinates', djgeojson.fields.PointField(blank=True, null=True, verbose_name='Coordinates')),
-                ('signal', models.BooleanField(default=True, verbose_name='Signal')),
-                ('creation_date', models.DateTimeField(blank=True, null=True, verbose_name='Creation date')),
-                ('last_update', models.DateTimeField(auto_now=True, null=True, verbose_name='Last update')),
-            ],
-            options={
-                'verbose_name': 'Mission',
-                'verbose_name_plural': 'Missions',
-                'permissions': (('view_mission', 'Can view missions'),),
-            },
-        ),
-        migrations.CreateModel(
             name='Municipality',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
@@ -104,22 +64,6 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Municipality',
                 'verbose_name_plural': 'Municipalities',
-            },
-        ),
-        migrations.CreateModel(
-            name='Training',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(max_length=100, verbose_name='Date')),
-                ('subject', models.CharField(max_length=200, verbose_name='Subject')),
-                ('note', models.CharField(blank=True, max_length=200, null=True, verbose_name='Note')),
-                ('creation_date', models.DateTimeField(blank=True, null=True, verbose_name='Creation date')),
-                ('last_update', models.DateTimeField(auto_now=True, null=True, verbose_name='Last update')),
-            ],
-            options={
-                'verbose_name': 'Training',
-                'verbose_name_plural': 'Trainings',
-                'permissions': (('view_training', 'Can view trainings'),),
             },
         ),
         migrations.CreateModel(
@@ -166,34 +110,9 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.AddField(
-            model_name='training',
-            name='editor',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='training_editor', to='base.UserProfile', verbose_name='Editor'),
-        ),
-        migrations.AddField(
-            model_name='training',
-            name='responsibles',
-            field=models.ManyToManyField(blank=True, related_name='training_responsibles', to='base.UserProfile', verbose_name='Responsibles'),
-        ),
-        migrations.AddField(
             model_name='municipality',
             name='editor',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='municipality_editor', to='base.UserProfile', verbose_name='Editor'),
-        ),
-        migrations.AddField(
-            model_name='mission',
-            name='editor',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='mission_editor', to='base.UserProfile', verbose_name='Editor'),
-        ),
-        migrations.AddField(
-            model_name='mission',
-            name='firefighters',
-            field=models.ManyToManyField(blank=True, related_name='mission_firefighters', to='base.UserProfile', verbose_name='Firefighters'),
-        ),
-        migrations.AddField(
-            model_name='mission',
-            name='vehicles',
-            field=models.ManyToManyField(blank=True, to='base.Vehicle', verbose_name='Vehicles'),
         ),
         migrations.AddField(
             model_name='message',
@@ -214,20 +133,5 @@ class Migration(migrations.Migration):
             model_name='firehouse',
             name='municipality',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='base.Municipality', verbose_name='Municipality'),
-        ),
-        migrations.AddField(
-            model_name='breathingprotectiontraining',
-            name='editor',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='base.UserProfile', verbose_name='Editor'),
-        ),
-        migrations.AddField(
-            model_name='breathingprotectiontraining',
-            name='organizer',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bpt_organizer', to='base.UserProfile', verbose_name='Organizer'),
-        ),
-        migrations.AddField(
-            model_name='breathingprotectiontraining',
-            name='participants',
-            field=models.ManyToManyField(blank=True, related_name='bpt_participants', to='base.UserProfile', verbose_name='Participants'),
         ),
     ]
