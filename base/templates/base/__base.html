@@ -53,17 +53,17 @@
                             <li role="presentation">
                                 <a href="{% url 'dashboard' %}">{% trans 'Home' %}</a>
                             </li>
-                            {% if perms.base.view_mission %}
+                            {% if perms.event.view_mission %}
                                 <li role="presentation">
                                     <a href="{% url 'mission_list' %}">{% trans 'Missions' %}</a>
                                 </li>
                             {% endif %}
-                            {% if perms.base.view_training %}
+                            {% if perms.event.view_training %}
                                 <li role="presentation">
                                     <a href="{% url 'training_list' %}">{% trans 'Trainings' %}</a>
                                 </li>
                             {% endif %}
-                            {% if perms.base.view_breathingprotectiontraining %}
+                            {% if perms.event.view_breathingprotectiontraining %}
                                 <li role="presentation">
                                     <a href="{% url 'bptraining_list' %}">{% trans 'Breathing Protection Trainings' %}</a>
                                 </li>
