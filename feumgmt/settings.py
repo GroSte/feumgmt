@@ -39,11 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base',
     'leaflet',
     'djgeojson',
     'crispy_forms',
     'gunicorn',
+    'base',
+    'event',
 )
 
 MIDDLEWARE_CLASSES = (

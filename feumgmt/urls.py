@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='js_i18n'),
     url(r'^$', RedirectView.as_view(pattern_name='dashboard', permanent=True)),
     url(r'^base/', include('base.urls')),
+    url(r'^event/', include('event.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ] + static(settings.STATIC_URL,
            document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
