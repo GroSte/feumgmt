@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    {% if perms.base.add_training %}
+    {% if perms.event.add_training %}
         <div class="row">
             <div class="col-sm-12">
                 <a href="{% url 'training_new' %}">
@@ -38,7 +38,7 @@
                     {% for item in object_list %}
                         <tr>
                             <td>
-                                {% if perms.base.change_training %}
+                                {% if perms.event.change_training %}
                                     <a href="{% url 'training_edit' item.id %}">{{ item.date|date:"d.m.Y" }}</a>
                                 {% else %}
                                     {{ item.date|date:"d.m.Y" }}
@@ -47,13 +47,13 @@
                             <td>{{ item.subject }}</td>
                             <td>{{ item.responsibles.all|join:', ' }}</td>
                             <td>
-                                {% if perms.base.change_training %}
+                                {% if perms.event.change_training %}
                                     <a href="{% url 'training_edit' item.id %}" title="{% trans 'Open' %}">
                                         <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                                     </a>
                                 {% endif %}
 
-                                {% if perms.base.delete_training %}
+                                {% if perms.event.delete_training %}
                                     <a href="{% url 'training_delete' item.id %}" title="{% trans 'Delete' %}">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </a>

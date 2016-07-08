@@ -25,7 +25,7 @@
                     {% for item in object_list %}
                         <tr>
                             <td>
-                                {% if perms.base.change_breathingprotectioncarrier %}
+                                {% if perms.event.change_breathingprotectioncarrier %}
                                     <a href="{% url 'bpcarrier_edit' item.id %}">
                                         {{ item }}
                                     </a>
@@ -36,7 +36,7 @@
                             <td>{{ item.next_medical_examination_date|date:"d.m.Y" }}</td>
                             <td>{{ item.next_breathing_protection_training_date|date:"d.m.Y" }}</td>
                             <td>
-                                {% if perms.base.change_breathingprotectioncarrier %}
+                                {% if perms.event.change_breathingprotectioncarrier %}
                                     <a href="{% url 'bpcarrier_edit' item.id %}" title="{% trans 'Open' %}">
                                         <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                                     </a>

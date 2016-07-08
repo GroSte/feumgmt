@@ -1,22 +1,22 @@
 {% extends "base/__base.html" %}
 {% load staticfiles i18n %}
 
-{% block title %}{{ block.super }} | {% trans 'Breathing Protection Training' %}{% endblock %}
+{% block title %}{{ block.super }} | {% trans 'Mission' %}{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
-            <h2>{% trans 'Breathing Protection Trainings' %}</h2>
+            <h2>{% trans 'Missions' %}</h2>
         </div>
     </div>
 
-    {% if perms.base.add_breathingprotectiontraining %}
+    {% if perms.event.add_mission %}
         <div class="row">
             <div class="col-sm-12">
-                <a href="{% url 'bptraining_new' %}">
+                <a href="{% url 'mission_new' %}">
                     <button type="button" class="btn btn-success btn-large">
                         <span class="glyphicon glyphicon-plus"></span>
-                        {% trans 'Create breathing protection training' %}
+                        {% trans 'Create mission' %}
                     </button>
                 </a>
             </div>
@@ -28,9 +28,10 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>{% trans 'Date' %}</th>
+                        <th>{% trans 'Alarm Time' %}</th>
+                        <th>{% trans 'Keyword' %}</th>
                         <th>{% trans 'Location' %}</th>
-                        <th>{% trans 'Participants' %}</th>
+                        <th>{% trans 'Street' %}</th>
                         <th>{% trans 'Actions' %}</th>
                     </tr>
                 </thead>
@@ -38,23 +39,28 @@
                     {% for item in object_list %}
                         <tr>
                             <td>
-                                {% if perms.base.change_breathingprotectiontraining %}
-                                    <a href="{% url 'bptraining_edit' item.id %}">{{ item.date|date:"d.m.Y" }}</a>
+                                {% if perms.event.change_mission %}
+                                    <a href="{% url 'mission_edit' item.id %}">{{ item.alarm_time }}</a>
                                 {% else %}
-                                    {{ item.date|date:"d.m.Y" }}
+                                    {{ item.alarm_time }}
                                 {% endif %}
                             </td>
+                            <td>{{ item.keyword }} - {{ item.volume }}</td>
                             <td>{{ item.location }}</td>
-                            <td>{{ item.participants.all|join:', ' }}</td>
+                            <td>{{ item.street }}</td>
                             <td>
-                                {% if perms.base.change_breathingprotectiontraining %}
-                                    <a href="{% url 'bptraining_edit' item.id %}" title="{% trans 'Open' %}">
+                                <a href="{% url 'mission_alarm' item.id %}" title="{% trans 'Show alarm view' %}">
+                                    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                </a>
+
+                                {% if perms.event.change_mission %}
+                                    <a href="{% url 'mission_edit' item.id %}" title="{% trans 'Open' %}">
                                         <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                                     </a>
                                 {% endif %}
 
-                                {% if perms.base.delete_breathingprotectiontraining %}
-                                    <a href="{% url 'bptraining_delete' item.id %}" title="{% trans 'Delete' %}">
+                                {% if perms.event.delete_mission %}
+                                    <a href="{% url 'mission_delete' item.id %}" title="{% trans 'Delete' %}">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                     </a>
                                 {% endif %}

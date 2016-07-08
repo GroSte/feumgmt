@@ -26,8 +26,8 @@ class MissionCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Mission
     success_url = reverse_lazy('mission_list')
     form_class = MissionForm
-    template_name = 'base/mission_form.html'
-    permission_required = 'base.add_mission'
+    template_name = 'event/mission_form.html'
+    permission_required = 'event.add_mission'
 
     def form_valid(self, form):
         form.instance.organizer_id = self.request.user.id
@@ -40,7 +40,7 @@ class MissionUpdate(UpdateView):
     model = Mission
     success_url = reverse_lazy('mission_list')
     form_class = MissionForm
-    template_name = 'base/mission_form.html'
+    template_name = 'event/mission_form.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(MissionUpdate, self).get_context_data(**kwargs)
@@ -58,7 +58,7 @@ class MissionDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Mission
     success_url = reverse_lazy('mission_list')
     template_name = 'base/_confirm_delete.html'
-    permission_required = 'base.delete_mission'
+    permission_required = 'event.delete_mission'
 
     def get_context_data(self, **kwargs):
         ctx = super(MissionDelete, self).get_context_data(**kwargs)
@@ -70,7 +70,7 @@ class MissionDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class MissionAlarm(TemplateView):
     model = Mission
-    template_name = 'base/mission_alarm.html'
+    template_name = 'event/mission_alarm.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(MissionAlarm, self).get_context_data(**kwargs)
@@ -88,15 +88,15 @@ class MissionAlarm(TemplateView):
 
 class BPTrainingList(ListView):
     model = BreathingProtectionTraining
-    template_name = 'base/bptraining_list.html'
+    template_name = 'event/bptraining_list.html'
 
 
 class BPTrainingCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = BreathingProtectionTraining
     success_url = reverse_lazy('bptraining_list')
     form_class = BPTrainingForm
-    template_name = 'base/bptraining_form.html'
-    permission_required = 'base.add_breathingprotectiontraining'
+    template_name = 'event/bptraining_form.html'
+    permission_required = 'event.add_breathingprotectiontraining'
 
     def form_valid(self, form):
         form.instance.organizer_id = self.request.user.id
@@ -109,8 +109,8 @@ class BPTrainingUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = BreathingProtectionTraining
     success_url = reverse_lazy('bptraining_list')
     form_class = BPTrainingForm
-    template_name = 'base/bptraining_form.html'
-    permission_required = 'base.change_breathingprotectiontraining'
+    template_name = 'event/bptraining_form.html'
+    permission_required = 'event.change_breathingprotectiontraining'
 
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
@@ -121,7 +121,7 @@ class BPTrainingDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = BreathingProtectionTraining
     success_url = reverse_lazy('bptraining_list')
     template_name = 'base/_confirm_delete.html'
-    permission_required = 'base.delete_breathingprotectiontraining'
+    permission_required = 'event.delete_breathingprotectiontraining'
 
     def get_context_data(self, **kwargs):
         ctx = super(BPTrainingDelete, self).get_context_data(**kwargs)
@@ -133,15 +133,15 @@ class BPTrainingDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class TrainingList(ListView):
     model = Training
-    template_name = 'base/training_list.html'
+    template_name = 'event/training_list.html'
 
 
 class TrainingCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Training
     success_url = reverse_lazy('training_list')
     form_class = TrainingForm
-    template_name = 'base/training_form.html'
-    permission_required = 'base.add_training'
+    template_name = 'event/training_form.html'
+    permission_required = 'event.add_training'
 
     def form_valid(self, form):
         form.instance.organizer_id = self.request.user.id
@@ -154,8 +154,8 @@ class TrainingUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Training
     success_url = reverse_lazy('training_list')
     form_class = TrainingForm
-    template_name = 'base/training_form.html'
-    permission_required = 'base.change_training'
+    template_name = 'event/training_form.html'
+    permission_required = 'event.change_training'
 
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
@@ -166,7 +166,7 @@ class TrainingDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Training
     success_url = reverse_lazy('training_list')
     template_name = 'base/_confirm_delete.html'
-    permission_required = 'base.delete_training'
+    permission_required = 'event.delete_training'
 
     def get_context_data(self, **kwargs):
         ctx = super(TrainingDelete, self).get_context_data(**kwargs)
@@ -178,7 +178,7 @@ class TrainingDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class BPCarrierList(ListView):
     model = UserProfile
-    template_name = 'base/bpcarrier_list.html'
+    template_name = 'event/bpcarrier_list.html'
 
     def get_queryset(self):
         queryset = super(BPCarrierList, self).get_queryset()
@@ -189,8 +189,8 @@ class BPCarrierUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = UserProfile
     success_url = reverse_lazy('bpcarrier_list')
     form_class = BPCarrierForm
-    template_name = 'base/bpcarrier_form.html'
-    permission_required = 'base.change_breathingprotectioncarrier'
+    template_name = 'event/bpcarrier_form.html'
+    permission_required = 'event.change_breathingprotectioncarrier'
 
     def form_valid(self, form):
         form.instance.editor_id = self.request.user.id
@@ -198,7 +198,7 @@ class BPCarrierUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
 
 class TrainingImport(TemplateView):
-    template_name = 'base/training_import.html'
+    template_name = 'event/training_import.html'
     success_url = reverse_lazy('dashboard')
 
     def get_context_data(self, **kwargs):
